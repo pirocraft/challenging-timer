@@ -1,7 +1,7 @@
-package com.github.pirocraft.challengingtimer.services
+package com.github.pirocraft.challengingtimer.example.services
 
 import com.intellij.openapi.project.Project
-import com.github.pirocraft.challengingtimer.MyBundle
+import com.github.pirocraft.challengingtimer.example.MyBundle
 
 class MyProjectService(project: Project) {
 

@@ -1,4 +1,4 @@
-package com.github.pirocraft.challengingtimer
+package com.github.pirocraft.challengingtimer.example
 
 import com.intellij.AbstractBundle
 import org.jetbrains.annotations.NonNls
