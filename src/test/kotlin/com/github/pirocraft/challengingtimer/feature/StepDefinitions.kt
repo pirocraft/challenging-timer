@@ -7,16 +7,11 @@ import io.cucumber.java8.En
 import kotlin.test.assertEquals
 
 class StepDefinitions : En {
-    private lateinit var configuration: Configuration
     private lateinit var timer: Timer
 
     init {
-        Given("A non parametrized timer") {
-            configuration = Configuration()
-        }
-
         When("I click on the timer for the first time") {
-            timer = Timer(configuration.period)
+            timer = Timer(Configuration.period)
         }
 
         Then("the timer has periods of {int}:{int}") { minutes: Int, seconds: Int ->
@@ -32,7 +27,7 @@ class StepDefinitions : En {
         }
 
         When("I parametrize the timer to {int}:{int}") { minutes: Int, seconds: Int ->
-            configuration.period = Period(minutes, seconds)
+            Configuration.period = Period(minutes, seconds)
         }
 
         Then("the timer display {int}:{int}") { minutes: Int, seconds: Int ->
