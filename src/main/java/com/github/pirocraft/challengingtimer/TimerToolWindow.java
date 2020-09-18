@@ -4,6 +4,9 @@ import com.intellij.openapi.wm.ToolWindow;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class TimerToolWindow {
     private JPanel timerPanel;
@@ -12,12 +15,7 @@ public class TimerToolWindow {
     public TimerToolWindow(ToolWindow toolWindow) {
     }
 
-    @Nullable
     public JComponent getContent() {
         return timerPanel;
-    }
-
-    private void createUIComponents() {
-
     }
 }
