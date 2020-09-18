@@ -8,12 +8,10 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.pirocraft.challengingtimer.example.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.pirocraft.challengingtimer.example.services.MyProjectService"/>
+        <toolWindow id="Challenging Timer"
+                    icon="AllIcons.General.Modified"
+                    anchor="left"
+                    factoryClass="com.github.pirocraft.challengingtimer.TimerToolWindowFactory"
+                    secondary="true"/>
     </extensions>
-
-    <projectListeners>
-        <listener class="com.github.pirocraft.challengingtimer.example.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </projectListeners>
 </idea-plugin>
