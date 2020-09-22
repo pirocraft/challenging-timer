@@ -6,7 +6,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.awt.Color
 
-class TimerView(var color: Color = Color.GREEN) {
+class TimerView {
+    var color: Color = Color.GREEN
+        private set
+
     fun timeLeft(): Period {
         return Period(1, 30)
     }
