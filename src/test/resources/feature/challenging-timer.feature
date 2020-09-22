@@ -9,7 +9,3 @@ Feature: Challenging timer
     And the timer begin with a green color
     Then the timer starts
     And the timer switch to red at the end of the period
-
-  Scenario: I parametrize the timer to 2:30
-    When I parametrize the timer to 2:30
-    Then the timer display 2:30

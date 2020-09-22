@@ -44,13 +44,5 @@ class StepDefinitions : En {
                 assertEquals(Color.RED, timer.color)
             }
         }
-
-        When("I parametrize the timer to {int}:{int}") { minutes: Int, seconds: Int ->
-            Configuration.period = Period(minutes, seconds)
-        }
-
-        Then("the timer display {int}:{int}") { minutes: Int, seconds: Int ->
-            TODO()
-        }
     }
 }
