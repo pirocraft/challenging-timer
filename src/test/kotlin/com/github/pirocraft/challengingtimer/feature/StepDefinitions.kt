@@ -3,45 +3,44 @@ package com.github.pirocraft.challengingtimer.feature
 import com.github.pirocraft.challengingtimer.Configuration
 import com.github.pirocraft.challengingtimer.Period
 import com.github.pirocraft.challengingtimer.Timer
+import com.github.pirocraft.challengingtimer.TimerView
 import io.cucumber.java8.En
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
 import java.awt.Color
 import java.time.Instant
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class StepDefinitions : En {
     private var timer = Timer(Configuration.period)
 
     init {
-        var start: Job = Job()
-        var startTime: Instant? = null
+        val timerView = TimerView()
+        var clickJob: Job = Job()
 
         Given("the default parameters") {
-            TODO()
+            Configuration.reset()
         }
 
         Then("the timer has periods of 1:30") {
-            assertEquals(Period(1, 30), timer.period)
+            assertEquals(Period(1, 30), timerView.timeLeft())
         }
 
 
         Then("the timer begin with a green color") {
-            assertEquals(Color.GREEN, timer.color)
+            assertEquals(Color.GREEN, timerView.color)
         }
 
-        When("the timer starts") {
-            start = timer.start()
-            startTime = Instant.now()
+
+        When("I simple-click the timer") {
+            clickJob = timerView.click()
         }
 
         Then("the timer switch to red at the end of the period") {
             runBlocking {
-                start.join()
-                val endTime = Instant.now()
+                clickJob.join()
 
-                assertEquals(Color.RED, timer.color)
+                assertEquals(Color.RED, timerView.color)
             }
         }
 
@@ -62,10 +61,6 @@ class StepDefinitions : En {
         }
 
         Then("the timer is green") {
-            TODO()
-        }
-
-        When("I simple-click the timer") {
             TODO()
         }
 
