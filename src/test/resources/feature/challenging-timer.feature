@@ -22,7 +22,7 @@ Feature: Challenging timer
     And the timer is green
 
   Scenario: I pause and resume the timer
-    Given the timer started
+    Given a started timer
     When I simple-click the timer
     Then the timer is paused
     And the timer is yellow
@@ -31,6 +31,6 @@ Feature: Challenging timer
     And the timer is green
 
   Scenario: I restart the timer
-    Given the timer started
+    Given a started timer
     When I double-click the timer
     Then the timer is restarted

@@ -18,8 +18,8 @@ class StepDefinitions : En {
         var start: Job = Job()
         var startTime: Instant? = null
 
-        When("I start a timer with default parameter") {
-
+        Given("the default parameters") {
+            TODO()
         }
 
         Then("the timer has periods of 1:30") {
@@ -31,7 +31,7 @@ class StepDefinitions : En {
             assertEquals(Color.GREEN, timer.color)
         }
 
-        Then("the timer starts") {
+        When("the timer starts") {
             start = timer.start()
             startTime = Instant.now()
         }
@@ -43,6 +43,50 @@ class StepDefinitions : En {
 
                 assertEquals(Color.RED, timer.color)
             }
+        }
+
+        When("I change the parameter to 2:30") {
+            TODO()
+        }
+
+        Then("the timer has periods of 2:30") {
+            TODO()
+        }
+
+        Given("a started timer") {
+            TODO()
+        }
+
+        Then("the timer is reset and paused with the new period") {
+            TODO()
+        }
+
+        Then("the timer is green") {
+            TODO()
+        }
+
+        When("I simple-click the timer") {
+            TODO()
+        }
+
+        Then("the timer is paused") {
+            TODO()
+        }
+
+        Then("the timer is yellow") {
+            TODO()
+        }
+
+        Then("the timer is resumed") {
+            TODO()
+        }
+
+        When("I double-click the timer") {
+            TODO()
+        }
+
+        Then("the timer is restarted") {
+            TODO()
         }
     }
 }
