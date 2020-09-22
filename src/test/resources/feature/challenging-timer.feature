@@ -15,7 +15,7 @@ Feature: Challenging timer
     When I change the parameter to 2:30
     Then the timer has periods of 2:30
 
-  Scenario: I timer is reset if I change the parameters
+  Scenario: The timer is reset if I change the parameters
     Given a started timer
     When I change the parameter to 2:30
     Then the timer is reset and paused with the new period
