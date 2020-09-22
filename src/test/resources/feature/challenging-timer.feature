@@ -1,11 +1,36 @@
 Feature: Challenging timer
 
-  The challenging timer is used to practice TDD baby-step challenging yourself to implement green tests before each
-  period end
+  The challenging timer is used to practice TDD baby-steps, challenging yourself to make your tests pass after each period
 
-  Scenario: I challenge myself with a 1:30 timer
-    When I start a timer with default parameter
+  Background:
+    Given the default parameters
+
+  Scenario: I challenge myself with the default 1:30 timer
     Then the timer has periods of 1:30
     And the timer begin with a green color
-    Then the timer starts
-    And the timer switch to red at the end of the period
+    When the timer starts
+    Then the timer switch to red at the end of the period
+
+  Scenario: I parametrize the timer to 2:30
+    When I change the parameter to 2:30
+    Then the timer has periods of 2:30
+
+  Scenario: I timer is reset if I change the parameters
+    Given a started timer
+    When I change the parameter to 2:30
+    Then the timer is reset and paused with the new period
+    And the timer is green
+
+  Scenario: I pause and resume the timer
+    Given the timer started
+    When I simple-click the timer
+    Then the timer is paused
+    And the timer is yellow
+    When I simple-click the timer
+    Then the timer is resumed
+    And the timer is green
+
+  Scenario: I restart the timer
+    Given the timer started
+    When I double-click the timer
+    Then the timer is restarted
