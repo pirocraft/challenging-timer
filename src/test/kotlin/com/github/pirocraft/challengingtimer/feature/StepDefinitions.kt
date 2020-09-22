@@ -18,7 +18,7 @@ class StepDefinitions : En {
         var start: Job = Job()
         var startTime: Instant? = null
 
-        When("I click on the timer for the first time") {
+        When("I start a timer with default parameter") {
 
         }
 

@@ -4,7 +4,7 @@ Feature: Challenging timer
   period end
 
   Scenario: I challenge myself with a 1:30 timer
-    When I click on the timer for the first time
+    When I start a timer with default parameter
     Then the timer has periods of 1:30
     And the timer begin with a green color
     Then the timer starts
