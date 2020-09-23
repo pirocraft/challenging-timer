@@ -1,27 +1,31 @@
 package com.github.pirocraft.challengingtimer
 
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.awt.Color
 
 class TimerView {
     var color: Color = Color.GREEN
         private set
+    private var periodLeft: Period = Configuration.period
+
+    init {
+        Configuration.subscribe {
+            periodLeft = it
+        }
+    }
 
     fun timeLeft(): Period {
-        return Period(1, 30)
+        return periodLeft
     }
 
     /**
      * Start the timer
      */
-    fun click(): Job {
-        return runBlocking {
-            launch {
-                color = Color.RED
-            }
-        }
+    fun click() = GlobalScope.launch {
+        Timer(Configuration.period).countdown {
+            periodLeft = it
+        }.join()
+        color = Color.RED
     }
 }

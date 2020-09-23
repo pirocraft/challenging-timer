@@ -11,14 +11,14 @@ import java.awt.Color
 import kotlin.test.assertEquals
 
 class StepDefinitions : En {
-    private var timer = Timer(Configuration.period)
 
     init {
         val timerView = TimerView()
         var clickJob: Job = Job()
 
         Given("the default parameters") {
-            Configuration.reset()
+//            Configuration.reset()
+            Configuration.period = Period(0, 2)
         }
 
         Then("the timer has periods of 1:30") {
@@ -39,16 +39,17 @@ class StepDefinitions : En {
             runBlocking {
                 clickJob.join()
 
+                assertEquals(0, timerView.timeLeft().inSeconds())
                 assertEquals(Color.RED, timerView.color)
             }
         }
 
         When("I change the parameter to 2:30") {
-            TODO()
+            Configuration.period = Period(2, 30)
         }
 
         Then("the timer has periods of 2:30") {
-            TODO()
+            assertEquals(Period(2, 30), timerView.timeLeft())
         }
 
         Given("a started timer") {
