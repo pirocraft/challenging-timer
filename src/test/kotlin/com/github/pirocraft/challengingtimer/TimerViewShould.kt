@@ -1,8 +1,7 @@
 package com.github.pirocraft.challengingtimer
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import kotlin.concurrent.timer
 
 internal class TimerViewShould {
     @Test
@@ -10,6 +9,8 @@ internal class TimerViewShould {
         val timerView = TimerView()
         assertEquals(Configuration.period, timerView.timeLeft())
         Configuration.period = Period(2, 30)
+        assertEquals(Configuration.period, timerView.timeLeft())
+        Configuration.period = Period(3, 30)
         assertEquals(Configuration.period, timerView.timeLeft())
     }
 }

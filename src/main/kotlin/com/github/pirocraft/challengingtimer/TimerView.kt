@@ -23,9 +23,13 @@ class TimerView {
      * Start the timer
      */
     fun click() = GlobalScope.launch {
-        Timer(Configuration.period).countdown {
-            periodLeft = it
-        }.join()
-        color = Color.RED
+        try {
+            Timer(Configuration.period).countdown {
+                periodLeft = it
+            }.join()
+        } finally {
+            periodLeft = Period(0, 0)
+            color = Color.RED
+        }
     }
 }

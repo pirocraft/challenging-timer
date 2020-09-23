@@ -2,10 +2,10 @@ package com.github.pirocraft.challengingtimer.feature
 
 import com.github.pirocraft.challengingtimer.Configuration
 import com.github.pirocraft.challengingtimer.Period
-import com.github.pirocraft.challengingtimer.Timer
 import com.github.pirocraft.challengingtimer.TimerView
 import io.cucumber.java8.En
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
 import java.awt.Color
 import kotlin.test.assertEquals
@@ -17,8 +17,7 @@ class StepDefinitions : En {
         var clickJob: Job = Job()
 
         Given("the default parameters") {
-//            Configuration.reset()
-            Configuration.period = Period(0, 2)
+            Configuration.reset()
         }
 
         Then("the timer has periods of 1:30") {
@@ -37,7 +36,7 @@ class StepDefinitions : En {
 
         Then("the timer switch to red at the end of the period") {
             runBlocking {
-                clickJob.join()
+                clickJob.cancelAndJoin()
 
                 assertEquals(0, timerView.timeLeft().inSeconds())
                 assertEquals(Color.RED, timerView.color)
