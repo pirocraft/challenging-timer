@@ -1,7 +1,7 @@
 package com.github.pirocraft.challengingtimer
 
 private const val SECONDS_IN_MINUTE = 60
-private const val LAST_SECOND_IN_A_MINUTE = 5
+private const val LAST_SECOND_IN_A_MINUTE = 59
 
 data class Period(private val minutes: Int, private val seconds: Int) {
 
