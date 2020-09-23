@@ -1,6 +1,6 @@
 package com.github.pirocraft.challengingtimer
 
-data class Period(val minutes: Int, val seconds: Int) {
+data class Period(private val minutes: Int, private val seconds: Int) {
 
     /**
      * Total of seconds in this Period
