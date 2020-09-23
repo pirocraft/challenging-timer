@@ -8,7 +8,6 @@ import io.cucumber.java8.En
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
 import java.awt.Color
-import java.time.Instant
 import kotlin.test.assertEquals
 
 class StepDefinitions : En {

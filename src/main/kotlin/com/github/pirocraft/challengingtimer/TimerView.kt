@@ -14,6 +14,9 @@ class TimerView {
         return Period(1, 30)
     }
 
+    /**
+     * Start the timer
+     */
     fun click(): Job {
         return runBlocking {
             launch {

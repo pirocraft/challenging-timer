@@ -24,7 +24,7 @@ class Timer(val period: Period) {
         }
     }
 
-    fun createCountdown(): Flow<Int> = flow {
+    fun countdown(): Flow<Int> = flow {
         for (i in 1..period.seconds) {
             delay(1000)
             emit (i)
