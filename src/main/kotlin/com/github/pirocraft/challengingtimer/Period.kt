@@ -1,6 +1,10 @@
 package com.github.pirocraft.challengingtimer
 
 data class Period(val minutes: Int, val seconds: Int) {
+
+    /**
+     * Total of seconds in this Period
+     */
     fun inSeconds(): Int {
         return seconds + minutes * 60
     }
