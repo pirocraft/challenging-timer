@@ -25,17 +25,28 @@ class TimerView {
      * Start the timer
      */
     fun click(): Job {
-        val launchedTimerJob = GlobalScope.launch {
-            try {
-                Timer(Configuration.period).countdown {
-                    periodLeft = it
-                }.join()
-            } finally {
-                periodLeft = Period(0, 0)
-                color = Color.RED
+        return if (startedTimerJob?.isActive == true) {
+            GlobalScope.launch {
+                startedTimerJob?.cancelAndJoin()
+                color = Color.YELLOW
             }
+        } else {
+            val launchedTimerJob = GlobalScope.launch {
+                launchATimer()
+            }
+            startedTimerJob = launchedTimerJob
+            launchedTimerJob
         }
-        startedTimerJob = launchedTimerJob
-        return launchedTimerJob
+    }
+
+    private suspend fun launchATimer() {
+        try {
+            Timer(Configuration.period).countdown {
+                periodLeft = it
+            }.join()
+        } finally {
+            periodLeft = Period(0, 0)
+            color = Color.RED
+        }
     }
 }

@@ -1,8 +1,11 @@
 package com.github.pirocraft.challengingtimer
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.awt.Color
 
 internal class TimerViewShould {
     @Test
@@ -19,10 +22,19 @@ internal class TimerViewShould {
     fun `be paused and reset after configuration change`() {
         val timerView = TimerView()
         val startedTimerJob = timerView.click()
-        
+
         Configuration.period = Period(2, 30)
 
         assertTrue(startedTimerJob.isCancelled)
         assertEquals(Configuration.period, timerView.timeLeft())
+    }
+
+    @Test
+    fun `pause the started timer when click for the second time`() {
+        val timerView = TimerView()
+        val startedTimerJob = timerView.click()
+        runBlocking { timerView.click().join() }
+        assertTrue(startedTimerJob.isCancelled)
+        assertEquals(Color.YELLOW, timerView.color)
     }
 }

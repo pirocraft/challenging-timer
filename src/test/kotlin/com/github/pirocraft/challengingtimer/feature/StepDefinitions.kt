@@ -15,7 +15,8 @@ class StepDefinitions : En {
 
     init {
         val timerView = TimerView()
-        var startedTimerJob: Job = Job()
+        var startTimerJob: Job? = null
+        var pauseTimerJob: Job? = null
         var newPeriod = Period(2,30)
 
         Given("the default parameters") {
@@ -33,12 +34,16 @@ class StepDefinitions : En {
 
 
         When("I simple-click the timer") {
-            startedTimerJob = timerView.click()
+            if (startTimerJob?.isActive != true) {
+                startTimerJob = timerView.click()
+            } else {
+                pauseTimerJob = timerView.click()
+            }
         }
 
         Then("the timer switch to red at the end of the period") {
             runBlocking {
-                startedTimerJob.cancelAndJoin()
+                startTimerJob?.cancelAndJoin()
 
                 assertEquals(0, timerView.timeLeft().inSeconds())
                 assertEquals(Color.RED, timerView.color)
@@ -55,20 +60,23 @@ class StepDefinitions : En {
         }
 
         Given("a started timer") {
-            startedTimerJob = timerView.click()
+            startTimerJob = timerView.click()
         }
 
         Then("the timer is reset and paused with the new period") {
-            assertTrue(startedTimerJob.isCancelled)
+            assertTrue(startTimerJob?.isCancelled == true)
             assertEquals(newPeriod, timerView.timeLeft())
         }
 
         Then("the timer is paused") {
-            TODO()
+            runBlocking {
+                startTimerJob?.join()
+                assertTrue(startTimerJob?.isCancelled == true)
+            }
         }
 
         Then("the timer is yellow") {
-            TODO()
+            assertEquals(Color.YELLOW, timerView.color)
         }
 
         Then("the timer is resumed") {
