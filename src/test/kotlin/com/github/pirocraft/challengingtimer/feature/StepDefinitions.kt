@@ -9,12 +9,14 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
 import java.awt.Color
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class StepDefinitions : En {
 
     init {
         val timerView = TimerView()
-        var clickJob: Job = Job()
+        var startedTimerJob: Job = Job()
+        var newPeriod = Period(2,30)
 
         Given("the default parameters") {
             Configuration.reset()
@@ -25,18 +27,18 @@ class StepDefinitions : En {
         }
 
 
-        Then("the timer begin with a green color") {
+        Then("the timer is green") {
             assertEquals(Color.GREEN, timerView.color)
         }
 
 
         When("I simple-click the timer") {
-            clickJob = timerView.click()
+            startedTimerJob = timerView.click()
         }
 
         Then("the timer switch to red at the end of the period") {
             runBlocking {
-                clickJob.cancelAndJoin()
+                startedTimerJob.cancelAndJoin()
 
                 assertEquals(0, timerView.timeLeft().inSeconds())
                 assertEquals(Color.RED, timerView.color)
@@ -44,7 +46,8 @@ class StepDefinitions : En {
         }
 
         When("I change the parameter to 2:30") {
-            Configuration.period = Period(2, 30)
+            newPeriod = Period(2,30)
+            Configuration.period = newPeriod
         }
 
         Then("the timer has periods of 2:30") {
@@ -52,15 +55,12 @@ class StepDefinitions : En {
         }
 
         Given("a started timer") {
-            TODO()
+            startedTimerJob = timerView.click()
         }
 
         Then("the timer is reset and paused with the new period") {
-            TODO()
-        }
-
-        Then("the timer is green") {
-            TODO()
+            assertTrue(startedTimerJob.isCancelled)
+            assertEquals(newPeriod, timerView.timeLeft())
         }
 
         Then("the timer is paused") {

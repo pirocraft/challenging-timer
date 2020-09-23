@@ -19,6 +19,9 @@ object Configuration {
         period = Period(DEFAULT_MINUTE, DEFAULT_SECONDS)
     }
 
+    /**
+     * Subscribe to configuration period modifications
+     */
     fun subscribe(action: (Period) -> Unit) {
         subscribers.add(action)
     }

@@ -7,7 +7,7 @@ Feature: Challenging timer
 
   Scenario: I challenge myself with the default 1:30 timer
     Then the timer has periods of 1:30
-    And the timer begin with a green color
+    And the timer is green
     When I simple-click the timer
     Then the timer switch to red at the end of the period
 
