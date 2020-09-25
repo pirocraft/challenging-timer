@@ -7,11 +7,11 @@ class TimerView {
     var color: Color = Color.GREEN
         private set
     private var periodLeft: Period = Configuration.period
-    private var startedTimerJob: Job? = null
+    private var currentTimerJob: Job? = null
 
     init {
         Configuration.subscribe {
-            runBlocking { startedTimerJob?.cancelAndJoin() }
+            runBlocking { currentTimerJob?.cancelAndJoin() }
             color = Color.GREEN
             periodLeft = it
         }
@@ -25,16 +25,16 @@ class TimerView {
      * Start the timer
      */
     fun click(): Job {
-        return if (startedTimerJob?.isActive == true) {
+        return if (currentTimerJob?.isActive == true) {
             GlobalScope.launch {
-                startedTimerJob?.cancelAndJoin()
+                currentTimerJob?.cancelAndJoin()
                 color = Color.YELLOW
             }
         } else {
             val launchedTimerJob = GlobalScope.launch {
                 launchATimer()
             }
-            startedTimerJob = launchedTimerJob
+            currentTimerJob = launchedTimerJob
             launchedTimerJob
         }
     }

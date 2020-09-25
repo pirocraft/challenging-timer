@@ -9,6 +9,11 @@ import java.awt.Color
 
 internal class TimerViewShould {
     @Test
+    fun `be green by default`() {
+        assertEquals(Color.GREEN, TimerView().color)
+    }
+
+    @Test
     fun `be updated after configuration change`() {
         val timerView = TimerView()
         assertEquals(Configuration.period, timerView.timeLeft())
@@ -16,6 +21,7 @@ internal class TimerViewShould {
         assertEquals(Configuration.period, timerView.timeLeft())
         Configuration.period = Period(3, 30)
         assertEquals(Configuration.period, timerView.timeLeft())
+        assertEquals(Color.GREEN, TimerView().color)
     }
 
     @Test
@@ -27,6 +33,7 @@ internal class TimerViewShould {
 
         assertTrue(startedTimerJob.isCancelled)
         assertEquals(Configuration.period, timerView.timeLeft())
+        assertEquals(Color.GREEN, TimerView().color)
     }
 
     @Test
