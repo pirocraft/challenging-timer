@@ -8,7 +8,8 @@ internal class TimerShould {
 
     @Test
     fun `count down to a period and execute an action each seconds`() {
-        var seconds = 2
+        MILLISECONDS_IN_SECOND = 10
+        var seconds = 5
         val timer = Timer(Period(0, seconds))
 
         runBlocking {

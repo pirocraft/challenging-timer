@@ -4,7 +4,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val MILLISECONDS_IN_SECOND = 1000
+internal var MILLISECONDS_IN_SECOND = 1000
 
 class Timer(private val period: Period) {
     /**

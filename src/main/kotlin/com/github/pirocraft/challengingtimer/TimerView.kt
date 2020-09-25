@@ -40,13 +40,9 @@ class TimerView {
     }
 
     private suspend fun launchATimer() {
-        try {
-            Timer(Configuration.period).countdown {
-                periodLeft = it
-            }.join()
-        } finally {
-            periodLeft = Period(0, 0)
-            color = Color.RED
-        }
+        Timer(Configuration.period).countdown {
+            periodLeft = it
+        }.join()
+        color = Color.RED
     }
 }

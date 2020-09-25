@@ -1,11 +1,11 @@
 package com.github.pirocraft.challengingtimer.feature
 
 import com.github.pirocraft.challengingtimer.Configuration
+import com.github.pirocraft.challengingtimer.MILLISECONDS_IN_SECOND
 import com.github.pirocraft.challengingtimer.Period
 import com.github.pirocraft.challengingtimer.TimerView
 import io.cucumber.java8.En
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.runBlocking
 import java.awt.Color
 import kotlin.test.assertEquals
@@ -14,6 +14,7 @@ import kotlin.test.assertTrue
 class StepDefinitions : En {
 
     init {
+        MILLISECONDS_IN_SECOND = 100
         val timerView = TimerView()
         var startTimerJob: Job? = null
         var pauseTimerJob: Job? = null
@@ -43,7 +44,7 @@ class StepDefinitions : En {
 
         Then("the timer switch to red at the end of the period") {
             runBlocking {
-                startTimerJob?.cancelAndJoin()
+                startTimerJob?.join()
 
                 assertEquals(0, timerView.timeLeft().inSeconds())
                 assertEquals(Color.RED, timerView.color)
@@ -64,6 +65,9 @@ class StepDefinitions : En {
         }
 
         Then("the timer is reset and paused with the new period") {
+            runBlocking {
+                startTimerJob?.join()
+            }
             assertTrue(startTimerJob?.isCancelled == true)
             assertEquals(newPeriod, timerView.timeLeft())
         }
