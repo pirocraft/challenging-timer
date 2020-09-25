@@ -16,7 +16,7 @@ internal class PeriodShould {
     }
 
     @Test
-    fun `return a new decrement decrement`() {
+    fun `return a new decremented Period`() {
         assertEquals(Period(0,0), Period(0, 1).decrement())
         assertEquals(Period(0,1), Period(0, 2).decrement())
         assertEquals(Period(0,2), Period(0, 3).decrement())
