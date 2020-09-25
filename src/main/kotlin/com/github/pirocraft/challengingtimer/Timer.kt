@@ -4,7 +4,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val MS_IN_SECOND = 1000
+private const val MILLISECONDS_IN_SECOND = 1000
 
 class Timer(private val period: Period) {
     /**
@@ -13,7 +13,7 @@ class Timer(private val period: Period) {
     fun countdown(action: (periodLeft: Period) -> Unit) = GlobalScope.launch {
         var periodLeft = period
         repeat(period.inSeconds()) {
-            delay(MS_IN_SECOND.toLong())
+            delay(MILLISECONDS_IN_SECOND.toLong())
             periodLeft = periodLeft.decrement()
             action(periodLeft)
         }
