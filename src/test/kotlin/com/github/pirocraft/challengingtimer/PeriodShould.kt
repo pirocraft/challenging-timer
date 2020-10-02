@@ -26,4 +26,14 @@ internal class PeriodShould {
         assertEquals(Period(2,1), Period(2, 2).decrement())
         assertEquals(Period(1,59), Period(2, 0).decrement())
     }
+
+    @Test
+    fun `return a printable period`() {
+        assertEquals("0:00", Period(0, 0).print())
+        assertEquals("0:01", Period(0, 1).print())
+        assertEquals("0:02", Period(0, 2).print())
+        assertEquals("0:11", Period(0, 11).print())
+        assertEquals("1:18", Period(1, 18).print())
+        assertEquals("10:41", Period(10, 41).print())
+    }
 }

@@ -19,4 +19,8 @@ data class Period(private val minutes: Int, private val seconds: Int) {
             else -> Period(minutes, seconds)
         }
     }
+
+    fun print(): String {
+        return "$minutes:${if (seconds.toString().length < 2) "0$seconds" else "$seconds"}"
+    }
 }
