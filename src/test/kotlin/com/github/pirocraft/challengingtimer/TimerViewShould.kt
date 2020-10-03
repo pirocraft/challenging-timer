@@ -1,11 +1,11 @@
 package com.github.pirocraft.challengingtimer
 
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.awt.Color
+import java.time.Duration
 
 internal class TimerViewShould {
     @Test
@@ -16,11 +16,11 @@ internal class TimerViewShould {
     @Test
     fun `be updated after configuration change`() {
         val timerView = TimerView()
-        assertEquals(Configuration.period, timerView.timeLeft())
-        Configuration.period = Period(2, 30)
-        assertEquals(Configuration.period, timerView.timeLeft())
-        Configuration.period = Period(3, 30)
-        assertEquals(Configuration.period, timerView.timeLeft())
+        assertEquals(Configuration.duration, timerView.timeLeft())
+        Configuration.duration = Duration.ofSeconds(30).plusMinutes(2)
+        assertEquals(Configuration.duration, timerView.timeLeft())
+        Configuration.duration = Duration.ofSeconds(30).plusMinutes(3)
+        assertEquals(Configuration.duration, timerView.timeLeft())
         assertEquals(Color.GREEN, TimerView().color)
     }
 
@@ -29,10 +29,10 @@ internal class TimerViewShould {
         val timerView = TimerView()
         val startedTimerJob = timerView.click()
 
-        Configuration.period = Period(2, 30)
+        Configuration.duration = Duration.ofSeconds(30).plusMinutes(2)
 
         assertTrue(startedTimerJob.isCancelled)
-        assertEquals(Configuration.period, timerView.timeLeft())
+        assertEquals(Configuration.duration, timerView.timeLeft())
         assertEquals(Color.GREEN, TimerView().color)
     }
 

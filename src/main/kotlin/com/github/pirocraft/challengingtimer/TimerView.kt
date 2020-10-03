@@ -2,23 +2,24 @@ package com.github.pirocraft.challengingtimer
 
 import kotlinx.coroutines.*
 import java.awt.Color
+import java.time.Duration
 
 class TimerView {
     var color: Color = Color.GREEN
         private set
-    private var periodLeft: Period = Configuration.period
+    private var timeLeft = Configuration.duration
     private var currentTimerJob: Job? = null
 
     init {
         Configuration.subscribe {
             runBlocking { currentTimerJob?.cancelAndJoin() }
             color = Color.GREEN
-            periodLeft = it
+            timeLeft = it
         }
     }
 
-    fun timeLeft(): Period {
-        return periodLeft
+    fun timeLeft(): Duration {
+        return timeLeft
     }
 
     /**
@@ -40,8 +41,8 @@ class TimerView {
     }
 
     private suspend fun launchATimer() {
-        Timer(Configuration.period).countdown {
-            periodLeft = it
+        Timer(Configuration.duration).countdown {
+            timeLeft = it
         }.join()
         color = Color.RED
     }

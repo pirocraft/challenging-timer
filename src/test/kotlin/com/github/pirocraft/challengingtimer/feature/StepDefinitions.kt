@@ -2,12 +2,12 @@ package com.github.pirocraft.challengingtimer.feature
 
 import com.github.pirocraft.challengingtimer.Configuration
 import com.github.pirocraft.challengingtimer.MILLISECONDS_IN_SECOND
-import com.github.pirocraft.challengingtimer.Period
 import com.github.pirocraft.challengingtimer.TimerView
 import io.cucumber.java8.En
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking
 import java.awt.Color
+import java.time.Duration
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -18,14 +18,14 @@ class StepDefinitions : En {
         val timerView = TimerView()
         var startTimerJob: Job? = null
         var pauseTimerJob: Job? = null
-        var newPeriod = Period(2,30)
+        var newDuration = Duration.ofSeconds(30).plusMinutes(2)
 
         Given("the default parameters") {
             Configuration.reset()
         }
 
         Then("the timer has periods of 1:30") {
-            assertEquals(Period(1, 30), timerView.timeLeft())
+            assertEquals(Duration.ofSeconds(30).plusMinutes(1), timerView.timeLeft())
         }
 
 
@@ -46,18 +46,18 @@ class StepDefinitions : En {
             runBlocking {
                 startTimerJob?.join()
 
-                assertEquals(0, timerView.timeLeft().inSeconds())
+                assertEquals(0, timerView.timeLeft().seconds)
                 assertEquals(Color.RED, timerView.color)
             }
         }
 
         When("I change the parameter to 2:30") {
-            newPeriod = Period(2,30)
-            Configuration.period = newPeriod
+            newDuration = Duration.ofSeconds(30).plusMinutes(2)
+            Configuration.duration = newDuration
         }
 
         Then("the timer has periods of 2:30") {
-            assertEquals(Period(2, 30), timerView.timeLeft())
+            assertEquals(Duration.ofSeconds(30).plusMinutes(2), timerView.timeLeft())
         }
 
         Given("a started timer") {
@@ -69,7 +69,7 @@ class StepDefinitions : En {
                 startTimerJob?.join()
             }
             assertTrue(startTimerJob?.isCancelled == true)
-            assertEquals(newPeriod, timerView.timeLeft())
+            assertEquals(newDuration, timerView.timeLeft())
         }
 
         Then("the timer is paused") {

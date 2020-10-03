@@ -1,28 +1,28 @@
 package com.github.pirocraft.challengingtimer
 
-private const val DEFAULT_MINUTE = 1
-private const val DEFAULT_SECONDS = 30
+import java.time.Duration
+
+private const val DEFAULT_MINUTE = 1.toLong()
+private const val DEFAULT_SECONDS = 30.toLong()
 
 object Configuration {
-    var period = Period(DEFAULT_MINUTE, DEFAULT_SECONDS)
+    var duration: Duration = defaultDuration()
         set(value) {
             field = value
             subscribers.forEach { it(value) }
         }
-    var subscribers = mutableListOf<(Period) -> Unit>()
-
-    init {
-        reset()
-    }
+    private var subscribers = mutableListOf<(Duration) -> Unit>()
 
     fun reset() {
-        period = Period(DEFAULT_MINUTE, DEFAULT_SECONDS)
+        duration = defaultDuration()
     }
+
+    private fun defaultDuration() = Duration.ofSeconds(DEFAULT_SECONDS).plusMinutes(DEFAULT_MINUTE)
 
     /**
      * Subscribe to configuration period modifications
      */
-    fun subscribe(action: (Period) -> Unit) {
+    fun subscribe(action: (Duration) -> Unit) {
         subscribers.add(action)
     }
 }
