@@ -43,7 +43,7 @@ class TimerView {
     private suspend fun launchATimer() {
         Timer(Configuration.duration).countdown {
             timeLeft = it
-        }.join()
+        }
         color = Color.RED
     }
 }
