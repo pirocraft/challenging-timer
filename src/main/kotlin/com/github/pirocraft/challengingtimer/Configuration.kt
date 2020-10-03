@@ -1,5 +1,8 @@
 package com.github.pirocraft.challengingtimer
 
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
+import io.reactivex.rxjava3.subjects.Subject
 import java.time.Duration
 
 private const val DEFAULT_MINUTE = 1.toLong()
@@ -9,20 +12,23 @@ object Configuration {
     var duration: Duration = defaultDuration()
         set(value) {
             field = value
-            subscribers.forEach { it(value) }
+            durationSubject.onNext(value)
         }
-    private var subscribers = mutableListOf<(Duration) -> Unit>()
+    private val durationSubject: Subject<Duration> = BehaviorSubject.create()
 
+    /**
+     * Reset the default configuration
+     */
     fun reset() {
         duration = defaultDuration()
     }
 
-    private fun defaultDuration() = Duration.ofSeconds(DEFAULT_SECONDS).plusMinutes(DEFAULT_MINUTE)
-
     /**
-     * Subscribe to configuration period modifications
+     * Subscribe to period modifications
      */
     fun subscribe(action: (Duration) -> Unit) {
-        subscribers.add(action)
+        durationSubject.subscribe(action)
     }
+
+    private fun defaultDuration() = Duration.ofSeconds(DEFAULT_SECONDS).plusMinutes(DEFAULT_MINUTE)
 }

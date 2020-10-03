@@ -25,7 +25,7 @@ class StepDefinitions : En {
         }
 
         Then("the timer has periods of 1:30") {
-            assertEquals(Duration.ofSeconds(30).plusMinutes(1), timerView.timeLeft())
+            assertEquals(Duration.ofSeconds(30).plusMinutes(1), timerView.timeLeft)
         }
 
 
@@ -46,7 +46,7 @@ class StepDefinitions : En {
             runBlocking {
                 startTimerJob?.join()
 
-                assertEquals(0, timerView.timeLeft().seconds)
+                assertEquals(0, timerView.timeLeft.seconds)
                 assertEquals(Color.RED, timerView.color)
             }
         }
@@ -57,7 +57,7 @@ class StepDefinitions : En {
         }
 
         Then("the timer has periods of 2:30") {
-            assertEquals(Duration.ofSeconds(30).plusMinutes(2), timerView.timeLeft())
+            assertEquals(Duration.ofSeconds(30).plusMinutes(2), timerView.timeLeft)
         }
 
         Given("a started timer") {
@@ -69,7 +69,7 @@ class StepDefinitions : En {
                 startTimerJob?.join()
             }
             assertTrue(startTimerJob?.isCancelled == true)
-            assertEquals(newDuration, timerView.timeLeft())
+            assertEquals(newDuration, timerView.timeLeft)
         }
 
         Then("the timer is paused") {

@@ -16,11 +16,11 @@ internal class TimerViewShould {
     @Test
     fun `be updated after configuration change`() {
         val timerView = TimerView()
-        assertEquals(Configuration.duration, timerView.timeLeft())
+        assertEquals(Configuration.duration, timerView.timeLeft)
         Configuration.duration = Duration.ofSeconds(30).plusMinutes(2)
-        assertEquals(Configuration.duration, timerView.timeLeft())
+        assertEquals(Configuration.duration, timerView.timeLeft)
         Configuration.duration = Duration.ofSeconds(30).plusMinutes(3)
-        assertEquals(Configuration.duration, timerView.timeLeft())
+        assertEquals(Configuration.duration, timerView.timeLeft)
         assertEquals(Color.GREEN, TimerView().color)
     }
 
@@ -32,7 +32,7 @@ internal class TimerViewShould {
         Configuration.duration = Duration.ofSeconds(30).plusMinutes(2)
 
         assertTrue(startedTimerJob.isCancelled)
-        assertEquals(Configuration.duration, timerView.timeLeft())
+        assertEquals(Configuration.duration, timerView.timeLeft)
         assertEquals(Color.GREEN, TimerView().color)
     }
 
