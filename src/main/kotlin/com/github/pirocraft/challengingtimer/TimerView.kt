@@ -1,14 +1,21 @@
 package com.github.pirocraft.challengingtimer
 
+import io.reactivex.rxjava3.subjects.BehaviorSubject
+import io.reactivex.rxjava3.subjects.Subject
 import kotlinx.coroutines.*
 import java.awt.Color
+import java.time.Duration
 
 class TimerView {
     var color: Color = Color.GREEN
         private set
     var timeLeft = Configuration.duration
-        private set
+        private set(value) {
+            field = value
+            durationSubject.onNext(value)
+        }
     private var currentTimerJob: Job? = null
+    private val durationSubject: Subject<Duration> = BehaviorSubject.create()
 
     init {
         Configuration.subscribe {
@@ -41,5 +48,9 @@ class TimerView {
             timeLeft = it
         }
         color = Color.RED
+    }
+
+    fun subscribe(action: (durationLeft: Duration) -> Unit) {
+        durationSubject.subscribe(action)
     }
 }

@@ -44,4 +44,13 @@ internal class TimerViewShould {
         assertTrue(startedTimerJob.isCancelled)
         assertEquals(Color.YELLOW, timerView.color)
     }
+
+    @Test
+    fun `publish time changes`() {
+        val timerView = TimerView()
+        var secondsLefts = 3
+        Configuration.duration = Duration.ofSeconds(3)
+        timerView.subscribe { assertEquals(secondsLefts--, it.seconds.toInt()) }
+        runBlocking { timerView.click().join() }
+    }
 }

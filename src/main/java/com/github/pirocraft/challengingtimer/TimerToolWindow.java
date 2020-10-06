@@ -11,8 +11,11 @@ import java.awt.event.MouseListener;
 public class TimerToolWindow {
     private JPanel timerPanel;
     private JLabel timerLabel;
+    private final TimerView timerView;
 
     public TimerToolWindow(ToolWindow toolWindow) {
+        timerView = new TimerView();
+//        timerView.
     }
 
     public JComponent getContent() {
