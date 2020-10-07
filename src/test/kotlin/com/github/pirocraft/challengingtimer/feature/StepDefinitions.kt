@@ -3,19 +3,17 @@ package com.github.pirocraft.challengingtimer.feature
 import com.github.pirocraft.challengingtimer.Configuration
 import com.github.pirocraft.challengingtimer.TimerView
 import io.cucumber.java8.En
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.runBlocking
+import io.reactivex.rxjava3.schedulers.TestScheduler
 import java.awt.Color
 import java.time.Duration
+import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class StepDefinitions : En {
 
     init {
         val timerView = TimerView()
-        var startTimerJob: Job? = null
-        var pauseTimerJob: Job? = null
+        val scheduler = TestScheduler()
         var newDuration = Duration.ofSeconds(30).plusMinutes(2)
 
         Given("the default parameters") {
@@ -23,7 +21,8 @@ class StepDefinitions : En {
         }
 
         Then("the timer has periods of 1:30") {
-            assertEquals(Duration.ofSeconds(30).plusMinutes(1), timerView.timeLeft)
+            assertEquals(Duration.ofSeconds(30).plusMinutes(1),
+                    timerView.timeLeft)
         }
 
 
@@ -33,21 +32,13 @@ class StepDefinitions : En {
 
 
         When("I simple-click the timer") {
-            TODO()
-            if (startTimerJob?.isActive != true) {
-//                startTimerJob = timerView.click()
-            } else {
-//                pauseTimerJob = timerView.click()
-            }
+            timerView.click(scheduler)
         }
 
         Then("the timer switch to red at the end of the period") {
-            runBlocking {
-                startTimerJob?.join()
-
-                assertEquals(0, timerView.timeLeft.seconds)
-                assertEquals(Color.RED, timerView.color)
-            }
+            scheduler.advanceTimeBy(1, TimeUnit.HOURS)
+            assertEquals(0, timerView.timeLeft.seconds)
+            assertEquals(Color.RED, timerView.color)
         }
 
         When("I change the parameter to 2:30") {
@@ -56,27 +47,23 @@ class StepDefinitions : En {
         }
 
         Then("the timer has periods of 2:30") {
-            assertEquals(Duration.ofSeconds(30).plusMinutes(2), timerView.timeLeft)
+            assertEquals(Duration.ofSeconds(30).plusMinutes(2),
+                    timerView.timeLeft)
         }
 
         Given("a started timer") {
-            TODO()
-//            startTimerJob = timerView.click()
+            timerView.click(scheduler)
+            scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
         }
 
         Then("the timer is reset and paused with the new period") {
-            runBlocking {
-                startTimerJob?.join()
-            }
-            assertTrue(startTimerJob?.isCancelled == true)
             assertEquals(newDuration, timerView.timeLeft)
         }
 
         Then("the timer is paused") {
-            runBlocking {
-                startTimerJob?.join()
-                assertTrue(startTimerJob?.isCancelled == true)
-            }
+            val timeLeft = timerView.timeLeft
+            scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+            assertEquals(timeLeft, timerView.timeLeft)
         }
 
         Then("the timer is yellow") {
@@ -84,7 +71,9 @@ class StepDefinitions : En {
         }
 
         Then("the timer is resumed") {
-            TODO()
+            val timeLeft = timerView.timeLeft
+            scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+            assertEquals(timeLeft.minusSeconds(10), timerView.timeLeft)
         }
 
         When("I double-click the timer") {
