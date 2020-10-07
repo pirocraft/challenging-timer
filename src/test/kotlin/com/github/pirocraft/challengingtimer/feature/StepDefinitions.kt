@@ -35,10 +35,11 @@ class StepDefinitions : En {
 
 
         When("I simple-click the timer") {
+            TODO()
             if (startTimerJob?.isActive != true) {
-                startTimerJob = timerView.click()
+//                startTimerJob = timerView.click()
             } else {
-                pauseTimerJob = timerView.click()
+//                pauseTimerJob = timerView.click()
             }
         }
 
@@ -61,7 +62,8 @@ class StepDefinitions : En {
         }
 
         Given("a started timer") {
-            startTimerJob = timerView.click()
+            TODO()
+//            startTimerJob = timerView.click()
         }
 
         Then("the timer is reset and paused with the new period") {

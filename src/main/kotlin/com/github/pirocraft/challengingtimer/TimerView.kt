@@ -1,11 +1,13 @@
 package com.github.pirocraft.challengingtimer
 
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.Subject
-import kotlinx.coroutines.*
 import java.awt.Color
 import java.time.Duration
+import java.util.concurrent.TimeUnit
 
 class TimerView {
     var color: Color = Color.GREEN
@@ -15,48 +17,57 @@ class TimerView {
             field = value
             durationSubject.onNext(value)
         }
-    private var currentTimerJob: Job? = null
-    private val durationSubject: Subject<Duration> = BehaviorSubject.create()
+    private var currentTimerDisposable: Disposable? = null
     private var configurationDisposable: Disposable
+    private val durationSubject: Subject<Duration> = BehaviorSubject.create()
 
     init {
         configurationDisposable = Configuration.subscribe {
-            runBlocking { currentTimerJob?.cancelAndJoin() }
+            disposeCurrentTimer()
             color = Color.GREEN
             timeLeft = it
         }
     }
 
     /**
-     * Start the timer
+     * Start the timer at first click, pause it at second click and restart at third
+     * @param scheduler for testing purpose to manipulate time
      */
-    fun click(): Job {
-        return if (currentTimerJob?.isActive == true) {
-            GlobalScope.launch {
-                currentTimerJob?.cancelAndJoin()
-                color = Color.YELLOW
-            }
+    fun click(scheduler: Scheduler? = null) {
+        if (currentTimerDisposable != null) {
+            disposeCurrentTimer()
+            color = Color.YELLOW
         } else {
-            val launchedTimerJob = GlobalScope.launch {
-                launchATimer()
-            }
-            currentTimerJob = launchedTimerJob
-            launchedTimerJob
+            launchATimer(scheduler)
         }
     }
 
-    private suspend fun launchATimer() {
-        Timer(Configuration.duration).countdown {
-            timeLeft = it
+    private fun launchATimer(scheduler: Scheduler?): Disposable {
+        val intervalRange = if (scheduler == null) {
+            Observable.intervalRange(1, Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS)
+        } else {
+            Observable.intervalRange(1, Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS, scheduler)
         }
-        color = Color.RED
+        return intervalRange.map { Configuration.duration.seconds - it }
+                .doOnNext { timeLeft = Duration.ofSeconds(it) }
+                .doOnComplete { color = Color.RED }
+                .subscribe()
+                .apply {
+                    currentTimerDisposable = this
+                }
     }
 
     fun subscribe(action: (durationLeft: Duration) -> Unit) {
         durationSubject.subscribe(action)
     }
 
+    private fun disposeCurrentTimer() {
+        currentTimerDisposable?.dispose()
+        currentTimerDisposable = null
+    }
+
     fun dispose() {
         configurationDisposable.dispose()
+        disposeCurrentTimer()
     }
 }
