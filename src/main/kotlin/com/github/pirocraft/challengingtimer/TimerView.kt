@@ -1,5 +1,6 @@
 package com.github.pirocraft.challengingtimer
 
+import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.Subject
 import kotlinx.coroutines.*
@@ -16,9 +17,10 @@ class TimerView {
         }
     private var currentTimerJob: Job? = null
     private val durationSubject: Subject<Duration> = BehaviorSubject.create()
+    private var configurationDisposable: Disposable
 
     init {
-        Configuration.subscribe {
+        configurationDisposable = Configuration.subscribe {
             runBlocking { currentTimerJob?.cancelAndJoin() }
             color = Color.GREEN
             timeLeft = it
@@ -52,5 +54,9 @@ class TimerView {
 
     fun subscribe(action: (durationLeft: Duration) -> Unit) {
         durationSubject.subscribe(action)
+    }
+
+    fun dispose() {
+        configurationDisposable.dispose()
     }
 }
