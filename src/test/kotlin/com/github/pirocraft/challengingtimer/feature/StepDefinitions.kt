@@ -1,7 +1,6 @@
 package com.github.pirocraft.challengingtimer.feature
 
 import com.github.pirocraft.challengingtimer.Configuration
-import com.github.pirocraft.challengingtimer.MILLISECONDS_IN_SECOND
 import com.github.pirocraft.challengingtimer.TimerView
 import io.cucumber.java8.En
 import kotlinx.coroutines.Job
@@ -14,7 +13,6 @@ import kotlin.test.assertTrue
 class StepDefinitions : En {
 
     init {
-        MILLISECONDS_IN_SECOND = 100
         val timerView = TimerView()
         var startTimerJob: Job? = null
         var pauseTimerJob: Job? = null
