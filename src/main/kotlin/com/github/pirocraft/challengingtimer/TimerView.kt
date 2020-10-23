@@ -71,3 +71,5 @@ class TimerView {
         disposeCurrentTimer()
     }
 }
+
+fun Duration.display() = "${this.toMinutesPart()}:${this.toSecondsPart()}"
