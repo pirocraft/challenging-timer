@@ -83,6 +83,19 @@ internal class TimerViewShould {
     }
 
     @Test
+    internal fun `resume when click for the third time`() {
+        timerView.click(scheduler)
+        scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+        timerView.click()
+        scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+        timerView.click(scheduler)
+        scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+
+        assertEquals(70, timerView.timeLeft.seconds)
+        assertEquals(Color.GREEN, timerView.color)
+    }
+
+    @Test
     internal fun `publish time changes`() {
         var timeLeft = timerView.timeLeft.seconds
 

@@ -44,6 +44,7 @@ class TimerView {
 
     private fun launchATimer(scheduler: Scheduler?): Disposable {
         val intervalRange = if (scheduler == null) {
+            // TODO Begin interval range with the previous pause section
             Observable.intervalRange(1, Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS)
         } else {
             Observable.intervalRange(1, Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS, scheduler)
