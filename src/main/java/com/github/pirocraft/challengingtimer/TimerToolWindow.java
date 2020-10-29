@@ -10,6 +10,9 @@ import java.awt.event.MouseEvent;
 import java.time.Duration;
 
 public class TimerToolWindow {
+    public static final String BACKGROUND_COLOR_GREEN = "#00FA24";
+    public static final String BACKGROUND_COLOR_YELLOW = "#FAFA00";
+    public static final String BACKGROUND_COLOR_RED = "#FA1700";
     private JPanel timerPanel;
     private JLabel timerLabel;
     private final TimerView timerView;
@@ -17,7 +20,7 @@ public class TimerToolWindow {
     public TimerToolWindow(ToolWindow toolWindow) {
         timerView = new TimerView();
         timerLabel.setText(TimerViewKt.display(timerView.getTimeLeft()));
-        timerPanel.setBackground(Color.GREEN);
+        timerPanel.setBackground(mapColor(Color.GREEN));
         timerView.subscribe(this::updateTime, this::updateColor);
 
         timerPanel.addMouseListener(new MouseAdapter() {
@@ -42,7 +45,15 @@ public class TimerToolWindow {
     }
 
     private Unit updateColor(Color color) {
-        timerPanel.setBackground(color);
+        timerPanel.setBackground(mapColor(color));
         return Unit.INSTANCE;
+    }
+
+    private Color mapColor(Color color) {
+        if (color == Color.YELLOW)
+            return Color.decode(BACKGROUND_COLOR_YELLOW);
+        else if (color == Color.RED)
+            return Color.decode(BACKGROUND_COLOR_RED);
+        return Color.decode(BACKGROUND_COLOR_GREEN);
     }
 }
