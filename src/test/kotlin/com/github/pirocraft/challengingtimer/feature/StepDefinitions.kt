@@ -21,15 +21,12 @@ class StepDefinitions : En {
         }
 
         Then("the timer has periods of 1:30") {
-            assertEquals(Duration.ofSeconds(30).plusMinutes(1),
-                    timerView.timeLeft)
+            assertEquals(Duration.ofSeconds(30).plusMinutes(1), timerView.timeLeft)
         }
-
 
         Then("the timer is green") {
             assertEquals(Color.GREEN, timerView.color)
         }
-
 
         When("I simple-click the timer") {
             timerView.click(scheduler)
@@ -47,8 +44,7 @@ class StepDefinitions : En {
         }
 
         Then("the timer has periods of 2:30") {
-            assertEquals(Duration.ofSeconds(30).plusMinutes(2),
-                    timerView.timeLeft)
+            assertEquals(Duration.ofSeconds(30).plusMinutes(2), timerView.timeLeft)
         }
 
         Given("a started timer") {
