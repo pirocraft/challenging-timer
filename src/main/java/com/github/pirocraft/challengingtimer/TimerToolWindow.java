@@ -23,6 +23,7 @@ public class TimerToolWindow {
         timerPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                // TODO Delay simple click event to avoid YELLOW -> GREEN flash
                 if (e.getClickCount() == 1)
                     timerView.click(null);
                 else

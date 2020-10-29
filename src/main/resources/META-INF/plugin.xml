@@ -9,7 +9,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow id="Challenging Timer"
-                    icon="AllIcons.General.Modified"
+                    icon="/icons/clock.svg"
                     anchor="left"
                     factoryClass="com.github.pirocraft.challengingtimer.TimerToolWindowFactory"
                     secondary="true"/>
