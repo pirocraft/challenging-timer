@@ -99,13 +99,29 @@ internal class TimerViewShould {
     internal fun `publish time changes`() {
         var timeLeft = timerView.timeLeft.seconds
 
-        timerView.subscribe { timeLeft = it.seconds }
+        timerView.subscribe({ timeLeft = it.seconds }, {})
         timerView.click(scheduler)
 
         while (timeLeft > 0) {
             assertEquals(timeLeft, timerView.timeLeft.seconds)
             scheduler.advanceTimeBy(1, TimeUnit.SECONDS)
         }
+    }
+
+    @Test
+    internal fun `publish color changes`() {
+        var color = timerView.color
+        timerView.subscribe({}, { color = it })
+        timerView.click(scheduler)
+        scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+
+        assertEquals(Color.GREEN, color)
+        timerView.click()
+        assertEquals(Color.YELLOW, color)
+        timerView.click(scheduler)
+        assertEquals(Color.GREEN, color)
+        scheduler.advanceTimeBy(1, TimeUnit.HOURS)
+        assertEquals(Color.RED, color)
     }
 
     @Test

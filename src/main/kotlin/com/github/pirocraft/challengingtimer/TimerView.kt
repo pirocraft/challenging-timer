@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.subjects.Subject
 import java.awt.Color
 import java.time.Duration
 import java.util.concurrent.TimeUnit
+import javax.annotation.Nullable
 
 /**
  * A timer that you can start, pause, resume and restart
@@ -17,7 +18,10 @@ import java.util.concurrent.TimeUnit
  */
 class TimerView {
     var color: Color = Color.GREEN
-        private set
+        private set(value) {
+            field = value
+            colorSubject.onNext(value)
+        }
     var timeLeft = Configuration.duration
         private set(value) {
             field = value
@@ -26,6 +30,7 @@ class TimerView {
     private var currentTimerDisposable: Disposable? = null
     private var configurationDisposable: Disposable
     private val durationSubject: Subject<Duration> = BehaviorSubject.create()
+    private val colorSubject: Subject<Color> = BehaviorSubject.create()
 
     init {
         configurationDisposable = Configuration.subscribe { reset() }
@@ -35,7 +40,7 @@ class TimerView {
      * Start the timer at first click, pause it at second click and restart at third
      * @param scheduler for testing purpose to manipulate time
      */
-    fun click(scheduler: Scheduler? = null) {
+    fun click(@Nullable scheduler: Scheduler? = null) {
         if (currentTimerDisposable != null) disposeCurrentTimer()
         else launchATimer(scheduler)
     }
@@ -44,17 +49,19 @@ class TimerView {
      * Restart the timer
      * @param scheduler for testing purpose to manipulate time
      */
-    fun doubleClick(scheduler: Scheduler? = null) {
+    fun doubleClick(@Nullable scheduler: Scheduler? = null) {
         reset()
         launchATimer(scheduler)
     }
 
     /**
-     * Subscribe to the timer countdown
-     * @param action use the next timer value
+     * Subscribe to the timer and color changes
+     * @param updateTime update with the new duration left
+     * @param updateColor update with the new color
      */
-    fun subscribe(action: (durationLeft: Duration) -> Unit) {
-        durationSubject.subscribe(action)
+    fun subscribe(updateTime: (durationLeft: Duration) -> Unit, updateColor: (newColor: Color) -> Unit) {
+        durationSubject.subscribe(updateTime)
+        colorSubject.subscribe(updateColor)
     }
 
     fun dispose() {
