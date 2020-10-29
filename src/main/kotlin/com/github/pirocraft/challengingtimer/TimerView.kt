@@ -9,6 +9,12 @@ import java.awt.Color
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
+/**
+ * A timer that you can start, pause, resume and restart
+ *
+ * The timer receive [Configuration][Configuration] modification that restart and pause it.
+ * Don't forget to [dispose][dispose] it
+ */
 class TimerView {
     var color: Color = Color.GREEN
         private set
@@ -34,9 +40,26 @@ class TimerView {
         else launchATimer(scheduler)
     }
 
+    /**
+     * Restart the timer
+     * @param scheduler for testing purpose to manipulate time
+     */
     fun doubleClick(scheduler: Scheduler? = null) {
         reset()
         launchATimer(scheduler)
+    }
+
+    /**
+     * Subscribe to the timer countdown
+     * @param action use the next timer value
+     */
+    fun subscribe(action: (durationLeft: Duration) -> Unit) {
+        durationSubject.subscribe(action)
+    }
+
+    fun dispose() {
+        configurationDisposable.dispose()
+        disposeCurrentTimer()
     }
 
     private fun launchATimer(scheduler: Scheduler?): Disposable =
@@ -60,18 +83,9 @@ class TimerView {
 
     private fun startOrResumeInterval() = (Configuration.duration - timeLeft).seconds + 1
 
-    fun subscribe(action: (durationLeft: Duration) -> Unit) {
-        durationSubject.subscribe(action)
-    }
-
     private fun disposeCurrentTimer() {
         currentTimerDisposable?.dispose()
         currentTimerDisposable = null
-    }
-
-    fun dispose() {
-        configurationDisposable.dispose()
-        disposeCurrentTimer()
     }
 
     private fun reset() {
