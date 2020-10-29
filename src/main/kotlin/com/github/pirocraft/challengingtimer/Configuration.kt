@@ -25,9 +25,7 @@ object Configuration {
     /**
      * Subscribe to period modifications
      */
-    fun subscribe(action: (Duration) -> Unit) =
-            durationSubject.subscribe(action)
-
+    fun subscribe(action: (Duration) -> Unit) = durationSubject.subscribe(action)
 
     private fun defaultDuration() = Duration.ofSeconds(DEFAULT_SECONDS).plusMinutes(DEFAULT_MINUTE)
 }
