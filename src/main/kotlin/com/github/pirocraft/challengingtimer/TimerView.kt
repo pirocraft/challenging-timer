@@ -74,11 +74,11 @@ class TimerView {
 
     private fun launchATimer(scheduler: Scheduler?): Disposable {
         return intervalRange(scheduler).map { timeLeft = timeLeft.minusSeconds(1) }
-            .doOnSubscribe { color = Color.GREEN }
-            .doOnComplete { color = Color.RED }
-            .doOnDispose { color = Color.YELLOW }
-            .subscribe()
-            .apply { currentTimerDisposable = this }
+                .doOnSubscribe { color = Color.GREEN }
+                .doOnComplete { color = Color.RED }
+                .doOnDispose { color = Color.YELLOW }
+                .subscribe()
+                .apply { currentTimerDisposable = this }
     }
 
     private fun intervalRange(scheduler: Scheduler?): Observable<Long> {
@@ -103,4 +103,4 @@ class TimerView {
     }
 }
 
-fun Duration.display() = "${toMinutesPart()}:${toSecondsPart()}"
+fun Duration.display() = "${toMinutes() % 60}:${seconds % 60}"
