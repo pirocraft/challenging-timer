@@ -39,24 +39,26 @@ class TimerView {
             color = Color.YELLOW
         } else {
             launchATimer(scheduler)
+            color = Color.GREEN
         }
     }
 
-    private fun launchATimer(scheduler: Scheduler?): Disposable {
-        val intervalRange = if (scheduler == null) {
-            // TODO Begin interval range with the previous pause section
-            Observable.intervalRange(1, Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS)
-        } else {
-            Observable.intervalRange(1, Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS, scheduler)
-        }
-        return intervalRange.map { Configuration.duration.seconds - it }
-                .doOnNext { timeLeft = Duration.ofSeconds(it) }
-                .doOnComplete { color = Color.RED }
-                .subscribe()
-                .apply {
-                    currentTimerDisposable = this
-                }
+    private fun launchATimer(scheduler: Scheduler?): Disposable =
+            intervalRange(scheduler).map { Configuration.duration.seconds - it }
+                    .doOnNext { timeLeft = Duration.ofSeconds(it) }
+                    .doOnComplete { color = Color.RED }
+                    .subscribe()
+                    .apply {
+                        currentTimerDisposable = this
+                    }
+
+    private fun intervalRange(scheduler: Scheduler?): Observable<Long> = if (scheduler == null) {
+        Observable.intervalRange(startOrResumeInterval(), Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS)
+    } else {
+        Observable.intervalRange(startOrResumeInterval(), Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS, scheduler)
     }
+
+    private fun startOrResumeInterval() = (Configuration.duration - timeLeft).seconds + 1
 
     fun subscribe(action: (durationLeft: Duration) -> Unit) {
         durationSubject.subscribe(action)
