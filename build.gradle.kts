@@ -42,6 +42,7 @@ repositories {
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.13.1")
     implementation("io.reactivex.rxjava3:rxjava:3.0.6")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
     testImplementation("io.cucumber:cucumber-java8:6.6.0")
     testImplementation("io.cucumber:cucumber-junit:6.6.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
