@@ -10,9 +10,9 @@ import java.awt.event.MouseEvent;
 import java.time.Duration;
 
 public class TimerToolWindow {
-    public static final String BACKGROUND_COLOR_GREEN = "#00FA24";
-    public static final String BACKGROUND_COLOR_YELLOW = "#FAFA00";
-    public static final String BACKGROUND_COLOR_RED = "#FA1700";
+    public static final String BACKGROUND_COLOR_GREEN = "#02E100";
+    public static final String BACKGROUND_COLOR_YELLOW = "#E1E100";
+    public static final String BACKGROUND_COLOR_RED = "#E10000";
     private JPanel timerPanel;
     private JLabel timerLabel;
     private final TimerView timerView;

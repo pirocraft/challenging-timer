@@ -70,9 +70,8 @@ class TimerView {
     }
 
     private fun launchATimer(scheduler: Scheduler?): Disposable =
-            intervalRange(scheduler).map { Configuration.duration.seconds - it }
+            intervalRange(scheduler).map { timeLeft = timeLeft.minusSeconds(1) }
                     .doOnSubscribe { color = Color.GREEN }
-                    .doOnNext { timeLeft = Duration.ofSeconds(it) }
                     .doOnComplete { color = Color.RED }
                     .doOnDispose { color = Color.YELLOW }
                     .subscribe()
@@ -82,13 +81,11 @@ class TimerView {
 
     private fun intervalRange(scheduler: Scheduler?): Observable<Long> =
             if (scheduler == null)
-                Observable.intervalRange(startOrResumeInterval(), Configuration.duration.seconds,
+                Observable.intervalRange(1, timeLeft.seconds,
                         1, 1, TimeUnit.SECONDS)
             else
-                Observable.intervalRange(startOrResumeInterval(), Configuration.duration.seconds,
+                Observable.intervalRange(1, timeLeft.seconds,
                         1, 1, TimeUnit.SECONDS, scheduler)
-
-    private fun startOrResumeInterval() = (Configuration.duration - timeLeft).seconds + 1
 
     private fun disposeCurrentTimer() {
         currentTimerDisposable?.dispose()
