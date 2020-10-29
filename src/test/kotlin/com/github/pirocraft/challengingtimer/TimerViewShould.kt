@@ -168,9 +168,8 @@ internal class TimerViewShould {
 
     @Test
     internal fun `format a duration for display`() {
-        // TODO Better display with 0:00 and 0:05
-        assertEquals("0:0", Duration.ofSeconds(0).display())
-        assertEquals("0:5", Duration.ofSeconds(5).display())
+        assertEquals("0:00", Duration.ofSeconds(0).display())
+        assertEquals("0:05", Duration.ofSeconds(5).display())
         assertEquals("0:30", Duration.ofSeconds(30).display())
         assertEquals("1:30", Duration.ofSeconds(30).plusMinutes(1).display())
     }
