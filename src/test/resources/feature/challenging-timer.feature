@@ -30,7 +30,12 @@ Feature: Challenging timer
     Then the timer is resumed
     And the timer is green
 
-  Scenario: I restart the timer
+  Scenario: I restart the timer with a double click
     Given a started timer
     When I double-click the timer
+    Then the timer is restarted
+
+  Scenario: I restart the timer with a simple click when it is finished
+    Given a finished timer
+    When I simple-click the timer
     Then the timer is restarted

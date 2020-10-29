@@ -84,5 +84,10 @@ class StepDefinitions : En {
             assertEquals(Configuration.duration, timerView.timeLeft)
             assertEquals(Color.GREEN, timerView.color)
         }
+
+        Given("a finished timer") {
+            timerView.click(scheduler)
+            scheduler.advanceTimeBy(1, TimeUnit.HOURS)
+        }
     }
 }

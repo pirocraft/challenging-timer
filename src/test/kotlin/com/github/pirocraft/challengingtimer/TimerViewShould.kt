@@ -157,6 +157,16 @@ internal class TimerViewShould {
     }
 
     @Test
+    internal fun `restart the timer with a simple click when finished`() {
+        timerView.click(scheduler)
+        scheduler.advanceTimeBy(1, TimeUnit.HOURS)
+        timerView.click(scheduler)
+        scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(Color.GREEN, timerView.color)
+    }
+
+    @Test
     internal fun `format a duration for display`() {
         // TODO Better display with 0:00 and 0:05
         assertEquals("0:0", Duration.ofSeconds(0).display())

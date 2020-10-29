@@ -38,11 +38,15 @@ class TimerView {
 
     /**
      * Start the timer at first click, pause it at second click and restart at third
+     * Restart the timer if it was previously finished
      * @param scheduler for testing purpose to manipulate time
      */
     fun click(@Nullable scheduler: Scheduler? = null) {
-        if (currentTimerDisposable != null) disposeCurrentTimer()
-        else launchATimer(scheduler)
+        when {
+            timeLeft.seconds == 0.toLong() -> restart(scheduler)
+            currentTimerDisposable != null -> disposeCurrentTimer()
+            else -> launchATimer(scheduler)
+        }
     }
 
     /**
@@ -50,8 +54,7 @@ class TimerView {
      * @param scheduler for testing purpose to manipulate time
      */
     fun doubleClick(@Nullable scheduler: Scheduler? = null) {
-        reset()
-        launchATimer(scheduler)
+        restart(scheduler)
     }
 
     /**
@@ -90,6 +93,11 @@ class TimerView {
     private fun disposeCurrentTimer() {
         currentTimerDisposable?.dispose()
         currentTimerDisposable = null
+    }
+
+    private fun restart(scheduler: Scheduler?) {
+        reset()
+        launchATimer(scheduler)
     }
 
     private fun reset() {
