@@ -6,7 +6,7 @@ import org.junit.runner.RunWith
 
 @RunWith(Cucumber::class)
 @CucumberOptions(
-        features = ["src/test/resources/feature"],
-        tags = "not @ignored"
+    features = ["src/test/resources/feature"],
+    tags = "not @ignored"
 )
 class RunCucumberTests
