@@ -34,29 +34,28 @@ class TimerView {
      * @param scheduler for testing purpose to manipulate time
      */
     fun click(scheduler: Scheduler? = null) {
-        if (currentTimerDisposable != null) {
-            disposeCurrentTimer()
-            color = Color.YELLOW
-        } else {
-            launchATimer(scheduler)
-            color = Color.GREEN
-        }
+        if (currentTimerDisposable != null) disposeCurrentTimer()
+        else launchATimer(scheduler)
     }
 
     private fun launchATimer(scheduler: Scheduler?): Disposable =
             intervalRange(scheduler).map { Configuration.duration.seconds - it }
+                    .doOnSubscribe { color = Color.GREEN }
                     .doOnNext { timeLeft = Duration.ofSeconds(it) }
                     .doOnComplete { color = Color.RED }
+                    .doOnDispose { color = Color.YELLOW }
                     .subscribe()
                     .apply {
                         currentTimerDisposable = this
                     }
 
-    private fun intervalRange(scheduler: Scheduler?): Observable<Long> = if (scheduler == null) {
-        Observable.intervalRange(startOrResumeInterval(), Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS)
-    } else {
-        Observable.intervalRange(startOrResumeInterval(), Configuration.duration.seconds, 1, 1, TimeUnit.SECONDS, scheduler)
-    }
+    private fun intervalRange(scheduler: Scheduler?): Observable<Long> =
+            if (scheduler == null)
+                Observable.intervalRange(startOrResumeInterval(), Configuration.duration.seconds,
+                        1, 1, TimeUnit.SECONDS)
+            else
+                Observable.intervalRange(startOrResumeInterval(), Configuration.duration.seconds,
+                        1, 1, TimeUnit.SECONDS, scheduler)
 
     private fun startOrResumeInterval() = (Configuration.duration - timeLeft).seconds + 1
 
