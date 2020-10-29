@@ -116,6 +116,31 @@ internal class TimerViewShould {
     }
 
     @Test
+    internal fun `restart the timer after a double click`() {
+        timerView.click(scheduler)
+        scheduler.advanceTimeBy(30, TimeUnit.SECONDS)
+        timerView.doubleClick(scheduler)
+        scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+
+        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(Color.GREEN, timerView.color)
+    }
+
+    @Test
+    internal fun `restart the timer after a double click during a pause`() {
+        timerView.click(scheduler)
+        scheduler.advanceTimeBy(30, TimeUnit.SECONDS)
+        timerView.click(scheduler)
+        assertEquals(Color.YELLOW, timerView.color)
+
+        timerView.doubleClick(scheduler)
+        scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
+
+        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(Color.GREEN, timerView.color)
+    }
+
+    @Test
     internal fun `format a duration for display`() {
         // TODO Better display with 0:00 and 0:05
         assertEquals("0:0", Duration.ofSeconds(0).display())

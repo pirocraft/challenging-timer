@@ -22,11 +22,7 @@ class TimerView {
     private val durationSubject: Subject<Duration> = BehaviorSubject.create()
 
     init {
-        configurationDisposable = Configuration.subscribe {
-            disposeCurrentTimer()
-            color = Color.GREEN
-            timeLeft = it
-        }
+        configurationDisposable = Configuration.subscribe { reset() }
     }
 
     /**
@@ -36,6 +32,11 @@ class TimerView {
     fun click(scheduler: Scheduler? = null) {
         if (currentTimerDisposable != null) disposeCurrentTimer()
         else launchATimer(scheduler)
+    }
+
+    fun doubleClick(scheduler: Scheduler? = null) {
+        reset()
+        launchATimer(scheduler)
     }
 
     private fun launchATimer(scheduler: Scheduler?): Disposable =
@@ -71,6 +72,12 @@ class TimerView {
     fun dispose() {
         configurationDisposable.dispose()
         disposeCurrentTimer()
+    }
+
+    private fun reset() {
+        disposeCurrentTimer()
+        color = Color.GREEN
+        timeLeft = Configuration.duration
     }
 }
 

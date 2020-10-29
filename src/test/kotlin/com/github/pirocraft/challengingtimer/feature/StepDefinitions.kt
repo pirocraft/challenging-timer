@@ -77,11 +77,12 @@ class StepDefinitions : En {
         }
 
         When("I double-click the timer") {
-            TODO()
+            timerView.doubleClick(scheduler)
         }
 
         Then("the timer is restarted") {
-            TODO()
+            assertEquals(Configuration.duration, timerView.timeLeft)
+            assertEquals(Color.GREEN, timerView.color)
         }
     }
 }
