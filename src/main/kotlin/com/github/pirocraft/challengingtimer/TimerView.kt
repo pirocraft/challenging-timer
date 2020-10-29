@@ -103,4 +103,4 @@ class TimerView {
     }
 }
 
-fun Duration.display() = "${this.toMinutesPart()}:${this.toSecondsPart()}"
+fun Duration.display() = "${toMinutesPart()}:${toSecondsPart()}"
