@@ -3,6 +3,8 @@
 # challenging-timer Changelog
 
 ## [Unreleased]
+- I can change the timer duration
+
 ### Added
 - I challenge myself with the default 1:30 timer
 - I pause and resume the timer
