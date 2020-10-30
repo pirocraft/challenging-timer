@@ -1,6 +1,7 @@
 Feature: Challenging timer
 
-  The challenging timer is used to practice TDD baby-steps, challenging yourself to make your tests pass after each period
+  Use the challenging timer to practice TDD baby-steps,
+  challenging yourself to make small changes that keep your tests green after each period
 
   Background:
     Given the default parameters
