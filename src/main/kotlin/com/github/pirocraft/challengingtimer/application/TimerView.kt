@@ -1,4 +1,4 @@
-package com.github.pirocraft.challengingtimer
+package com.github.pirocraft.challengingtimer.application
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Scheduler

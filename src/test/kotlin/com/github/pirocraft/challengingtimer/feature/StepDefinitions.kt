@@ -1,7 +1,7 @@
 package com.github.pirocraft.challengingtimer.feature
 
-import com.github.pirocraft.challengingtimer.Configuration
-import com.github.pirocraft.challengingtimer.TimerView
+import com.github.pirocraft.challengingtimer.application.Configuration
+import com.github.pirocraft.challengingtimer.application.TimerView
 import io.cucumber.java8.En
 import io.cucumber.java8.Scenario
 import io.reactivex.rxjava3.schedulers.TestScheduler

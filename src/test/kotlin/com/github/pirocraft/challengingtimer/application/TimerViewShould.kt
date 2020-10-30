@@ -1,4 +1,4 @@
-package com.github.pirocraft.challengingtimer
+package com.github.pirocraft.challengingtimer.application
 
 import io.reactivex.rxjava3.schedulers.TestScheduler
 import org.junit.jupiter.api.AfterEach

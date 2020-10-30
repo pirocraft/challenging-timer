@@ -11,7 +11,7 @@
         <toolWindow id="Challenging Timer"
                     icon="/icons/clock.svg"
                     anchor="left"
-                    factoryClass="com.github.pirocraft.challengingtimer.TimerToolWindowFactory"
+                    factoryClass="com.github.pirocraft.challengingtimer.ui.TimerToolWindowFactory"
                     secondary="true"/>
     </extensions>
 </idea-plugin>

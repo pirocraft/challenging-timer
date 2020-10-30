@@ -1,5 +1,7 @@
-package com.github.pirocraft.challengingtimer;
+package com.github.pirocraft.challengingtimer.ui;
 
+import com.github.pirocraft.challengingtimer.application.TimerView;
+import com.github.pirocraft.challengingtimer.application.TimerViewKt;
 import com.intellij.openapi.wm.ToolWindow;
 import kotlin.Unit;
 
