@@ -13,5 +13,9 @@
                     anchor="left"
                     factoryClass="com.github.pirocraft.challengingtimer.ui.TimerToolWindowFactory"
                     secondary="true"/>
+        <applicationConfigurable parentId="tools" instance="com.github.pirocraft.challengingtimer.ui.ApplicationSettingsConfigurable"
+                                 id="com.github.pirocraft.challengingtimer.ui.ApplicationSettingsConfigurable"
+                                 displayName="Challenging Timer"/>
+        <applicationService serviceImplementation="com.github.pirocraft.challengingtimer.ui.ApplicationSettingsState"/>
     </extensions>
 </idea-plugin>
