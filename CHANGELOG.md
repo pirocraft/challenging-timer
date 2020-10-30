@@ -3,6 +3,8 @@
 # challenging-timer Changelog
 
 ## [Unreleased]
+- I can change the timer duration
+
 ### Added
 
 ### Changed
@@ -14,8 +16,8 @@
 ### Fixed
 
 ### Security
+
 ## [0.1.1]
-- I can change the timer duration
 
 ### Added
 - I challenge myself with the default 1:30 timer
