@@ -2,11 +2,15 @@ package com.github.pirocraft.challengingtimer.application
 
 import java.time.Duration
 
-class ConfigurationView {
-    var duration = Configuration.duration.display()
+class ConfigurationView(duration: String) {
+    var duration = duration
+        set(value) {
+            value.split(":").map { it.toLong() }
+            field = value
+        }
 
-    fun modifyDuration(newDuration: String) {
-        val (minutes, seconds) = newDuration.split(":").map { it.toLong() }
+    fun validateChanges() {
+        val (minutes, seconds) = duration.split(":").map { it.toLong() }
         Configuration.duration = Duration.ofSeconds(seconds).plusMinutes(minutes)
     }
 }

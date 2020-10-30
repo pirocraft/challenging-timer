@@ -3,6 +3,7 @@ package com.github.pirocraft.challengingtimer.feature
 import com.github.pirocraft.challengingtimer.application.Configuration
 import com.github.pirocraft.challengingtimer.application.ConfigurationView
 import com.github.pirocraft.challengingtimer.application.TimerView
+import com.github.pirocraft.challengingtimer.application.display
 import io.cucumber.java8.En
 import io.cucumber.java8.Scenario
 import io.reactivex.rxjava3.schedulers.TestScheduler
@@ -15,7 +16,7 @@ class StepDefinitions : En {
 
     init {
         val timerView = TimerView()
-        val configurationView = ConfigurationView()
+        val configurationView = ConfigurationView(Configuration.duration.display())
         val scheduler = TestScheduler()
         val newDuration = Duration.ofSeconds(30).plusMinutes(2)
 
@@ -44,7 +45,8 @@ class StepDefinitions : En {
         }
 
         When("I change the parameter to 2:30") {
-            configurationView.modifyDuration("2:30")
+            configurationView.duration = "2:30"
+            configurationView.validateChanges()
         }
 
         Then("the timer has periods of 2:30") {
