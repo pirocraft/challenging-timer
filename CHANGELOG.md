@@ -3,6 +3,18 @@
 # challenging-timer Changelog
 
 ## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [0.1.1]
 - I can change the timer duration
 
 ### Added
