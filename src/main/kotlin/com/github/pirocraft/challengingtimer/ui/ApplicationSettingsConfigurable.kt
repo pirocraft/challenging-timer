@@ -5,15 +5,15 @@ import javax.swing.JComponent
 
 class ApplicationSettingsConfigurable : Configurable {
     override fun createComponent(): JComponent? {
-        TODO("Not yet implemented")
+        return ApplicationSettingsComponent().content()
     }
 
     override fun isModified(): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 
     override fun apply() {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
     }
 
     override fun getDisplayName() = "Challenging Timer"
