@@ -12,16 +12,6 @@ Feature: Challenging timer
     When I simple-click the timer
     Then the timer switch to red at the end of the period
 
-  Scenario: I parametrize the timer to 2:30
-    When I change the parameter to 2:30
-    Then the timer has periods of 2:30
-
-  Scenario: The timer is reset if I change the parameters
-    Given a started timer
-    When I change the parameter to 2:30
-    Then the timer is reset and paused with the new period
-    And the timer is green
-
   Scenario: I pause and resume the timer
     Given a started timer
     When I simple-click the timer
@@ -40,3 +30,13 @@ Feature: Challenging timer
     Given a finished timer
     When I simple-click the timer
     Then the timer is restarted
+
+  Scenario: I parametrize the timer to 2:30
+    When I change the parameter to 2:30
+    Then the timer has periods of 2:30
+
+  Scenario: The timer is reset if I change the parameters
+    Given a started timer
+    When I change the parameter to 2:30
+    Then the timer is reset and paused with the new period
+    And the timer is green

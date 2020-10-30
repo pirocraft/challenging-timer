@@ -3,6 +3,7 @@ package com.github.pirocraft.challengingtimer.feature
 import com.github.pirocraft.challengingtimer.Configuration
 import com.github.pirocraft.challengingtimer.TimerView
 import io.cucumber.java8.En
+import io.cucumber.java8.Scenario
 import io.reactivex.rxjava3.schedulers.TestScheduler
 import java.awt.Color
 import java.time.Duration
@@ -15,6 +16,8 @@ class StepDefinitions : En {
         val timerView = TimerView()
         val scheduler = TestScheduler()
         var newDuration = Duration.ofSeconds(30).plusMinutes(2)
+
+        After { scenario: Scenario -> Configuration.reset() }
 
         Given("the default parameters") {
             Configuration.reset()
