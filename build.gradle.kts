@@ -41,6 +41,12 @@ repositories {
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.13.1")
+    implementation("io.reactivex.rxjava3:rxjava:3.0.6")
+    testImplementation("io.cucumber:cucumber-java8:6.6.0")
+    testImplementation("io.cucumber:cucumber-junit:6.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.0")
 }
 
 // Configure gradle-intellij-plugin plugin.
@@ -119,5 +125,9 @@ tasks {
         dependsOn("patchChangelog")
         token(System.getenv("PUBLISH_TOKEN"))
         channels(pluginVersion.split('-').getOrElse(1) { "default" }.split('.').first())
+    }
+
+    test {
+        useJUnitPlatform()
     }
 }
