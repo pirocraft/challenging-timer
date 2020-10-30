@@ -5,17 +5,20 @@ import com.intellij.openapi.options.Configurable
 import javax.swing.JComponent
 
 class ApplicationSettingsConfigurable : Configurable {
+    private lateinit var configurationView: ConfigurationView
+
     override fun createComponent(): JComponent? {
-        val configurationView = ConfigurationView(ApplicationSettingsState.duration)
+        configurationView = ConfigurationView(ApplicationSettingsState.duration)
         return ApplicationSettingsComponent(configurationView).content()
     }
 
     override fun apply() {
-//        TODO("Not yet implemented")
+        configurationView.validateChanges()
+        ApplicationSettingsState.duration = configurationView.duration
     }
 
     override fun isModified(): Boolean {
-        return false
+        return configurationView.isChanged()
     }
 
     override fun getDisplayName() = "Challenging Timer"
