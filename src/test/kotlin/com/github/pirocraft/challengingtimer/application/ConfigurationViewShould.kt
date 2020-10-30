@@ -1,5 +1,6 @@
 package com.github.pirocraft.challengingtimer.application
 
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -10,6 +11,11 @@ internal class ConfigurationViewShould {
     @BeforeEach
     internal fun setUp() {
         configurationView = ConfigurationView()
+    }
+
+    @AfterEach
+    internal fun tearDown() {
+        Configuration.reset()
     }
 
     @Test
