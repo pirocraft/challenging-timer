@@ -1,7 +1,5 @@
 package com.github.pirocraft.challengingtimer.application
 
-import java.time.Duration
-
 class ConfigurationView(duration: String,
                         val timerPeriodLabel: String = "Timer period :",
                         private var modified: Boolean = false) {
@@ -12,8 +10,7 @@ class ConfigurationView(duration: String,
         }
 
     fun validateChanges() {
-        val (minutes, seconds) = duration.split(":").map { it.toLong() }
-        Configuration.duration = Duration.ofSeconds(seconds).plusMinutes(minutes)
+        Configuration.duration = parse(duration)
         modified = false
     }
 

@@ -1,7 +1,7 @@
 package com.github.pirocraft.challengingtimer.ui;
 
 import com.github.pirocraft.challengingtimer.application.ConfigurationKt;
-import com.github.pirocraft.challengingtimer.application.DurationMapperKt;
+import com.github.pirocraft.challengingtimer.application.DurationParserKt;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 @State(name = "com.github.pirocraft.challengingtimer.ui.ApplicationSettingsState",
         storages = {@Storage("SdkSettingsPlugin.xml")})
 public class ApplicationSettingsState implements PersistentStateComponent<ApplicationSettingsState> {
-    public String duration = DurationMapperKt.display(ConfigurationKt.defaultDuration());
+    public String duration = DurationParserKt.display(ConfigurationKt.defaultDuration());
 
     public static ApplicationSettingsState getInstance() {
         return ServiceManager.getService(ApplicationSettingsState.class);
