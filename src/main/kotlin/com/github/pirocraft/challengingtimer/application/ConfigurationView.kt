@@ -7,7 +7,6 @@ class ConfigurationView(duration: String,
                         private var modified: Boolean = false) {
     var duration = duration
         set(value) {
-            value.split(":").map { it.toLong() }
             field = value
             modified = true
         }
