@@ -21,3 +21,5 @@ class ConfigurationView(duration: String,
         return modified
     }
 }
+
+fun Duration.display() = "${toMinutes() % MINUTES_IN_HOUR}:${(seconds % SECONDS_IN_HOUR).toString().padStart(2, '0')}"
