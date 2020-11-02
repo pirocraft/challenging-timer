@@ -34,10 +34,12 @@ internal class DurationParserKtShould {
         shouldThrowParseError("10")
         shouldThrowParseError("0:0:10")
         shouldThrowParseError("0-10")
+        shouldThrowParseError("0:100")
+        shouldThrowParseError("000:10")
     }
 
     private fun shouldThrowParseError(duration: String) {
         val exception = assertThrows<DurationParseException> { parse(duration) }
-        assertEquals("Duration should respect this template <minutes>:<seconds> like 01:30", exception.message)
+        assertEquals("Duration should respect this template \\d{1,2}:\\d{1,2} like 01:30", exception.message)
     }
 }
