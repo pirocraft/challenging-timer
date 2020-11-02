@@ -8,12 +8,12 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
-internal class ConfigurationViewShould {
-    private lateinit var configurationView: ConfigurationView
+internal class SettingsViewShould {
+    private lateinit var settingsView: SettingsView
 
     @BeforeEach
     internal fun setUp() {
-        configurationView = ConfigurationView(Configuration.duration.display())
+        settingsView = SettingsView(Configuration.duration.format())
     }
 
     @AfterEach
@@ -23,24 +23,24 @@ internal class ConfigurationViewShould {
 
     @Test
     internal fun `have a timer period input`() {
-        assertEquals("2:30", ConfigurationView("2:30").duration)
-        assertEquals(Configuration.duration.display(), configurationView.duration)
-        configurationView.duration = "1:00"
-        assertEquals("1:00", configurationView.duration)
+        assertEquals("2:30", SettingsView("2:30").duration)
+        assertEquals(Configuration.duration.format(), settingsView.duration)
+        settingsView.duration = "1:00"
+        assertEquals("1:00", settingsView.duration)
     }
 
     @Test
     internal fun `have a timer period label`() {
-        assertEquals("Timer period :", configurationView.timerPeriodLabel)
+        assertEquals("Timer period :", settingsView.timerPeriodLabel)
     }
 
     @Test
     internal fun `define if configuration is changed`() {
-        assertFalse(configurationView.isChanged())
-        configurationView.duration = "1:00"
-        assertTrue(configurationView.isChanged())
-        configurationView.validateChanges()
-        assertFalse(configurationView.isChanged())
+        assertFalse(settingsView.isChanged())
+        settingsView.duration = "1:00"
+        assertTrue(settingsView.isChanged())
+        settingsView.validateChanges()
+        assertFalse(settingsView.isChanged())
     }
 
     @Test
@@ -53,9 +53,9 @@ internal class ConfigurationViewShould {
     }
 
     private fun shouldChangeDurationConfigurationAfterValidation(newDuration: String) {
-        configurationView.duration = newDuration
-        assertNotEquals(Configuration.duration.display(), newDuration)
-        configurationView.validateChanges()
-        assertEquals(Configuration.duration.display(), newDuration)
+        settingsView.duration = newDuration
+        assertNotEquals(Configuration.duration.format(), newDuration)
+        settingsView.validateChanges()
+        assertEquals(Configuration.duration.format(), newDuration)
     }
 }

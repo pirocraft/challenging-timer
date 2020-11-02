@@ -1,24 +1,27 @@
 package com.github.pirocraft.challengingtimer.ui
 
-import com.github.pirocraft.challengingtimer.application.ConfigurationView
+import com.github.pirocraft.challengingtimer.application.SettingsView
 import com.intellij.openapi.options.Configurable
 import javax.swing.JComponent
 
+/**
+ * IntelliJ controller to manage plugins settings
+ */
 class ApplicationSettingsConfigurable : Configurable {
-    private lateinit var configurationView: ConfigurationView
+    private lateinit var settingsView: SettingsView
 
     override fun createComponent(): JComponent? {
-        configurationView = ConfigurationView(ApplicationSettingsState.getInstance().duration)
-        return ApplicationSettingsComponent(configurationView).content()
+        settingsView = SettingsView(ApplicationSettingsState.getInstance().duration)
+        return ApplicationSettingsComponent(settingsView).content()
     }
 
     override fun apply() {
-        configurationView.validateChanges()
-        ApplicationSettingsState.getInstance().duration = configurationView.duration
+        settingsView.validateChanges()
+        ApplicationSettingsState.getInstance().duration = settingsView.duration
     }
 
     override fun isModified(): Boolean {
-        return configurationView.isChanged()
+        return settingsView.isChanged()
     }
 
     override fun getDisplayName() = "Challenging Timer"

@@ -1,6 +1,6 @@
 package com.github.pirocraft.challengingtimer.ui
 
-import com.github.pirocraft.challengingtimer.application.ConfigurationView
+import com.github.pirocraft.challengingtimer.application.SettingsView
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBTextField
 import com.intellij.util.ui.FormBuilder
@@ -9,26 +9,29 @@ import javax.swing.JPanel
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 
-class ApplicationSettingsComponent(private val configurationView: ConfigurationView) {
+/**
+ * IntelliJ settings component
+ */
+class ApplicationSettingsComponent(private val settingsView: SettingsView) {
     fun content(): JPanel = FormBuilder.createFormBuilder()
-            .addLabeledComponent(JBLabel(configurationView.timerPeriodLabel),
+            .addLabeledComponent(JBLabel(settingsView.timerPeriodLabel),
                     inputField(),
                     1, false)
             .addComponentFillVertically(JPanel(), 0)
             .panel
 
-    private fun inputField(): JComponent = JBTextField(configurationView.duration).apply {
+    private fun inputField(): JComponent = JBTextField(settingsView.duration).apply {
         document.addDocumentListener(object : DocumentListener {
             override fun insertUpdate(e: DocumentEvent?) {
-                configurationView.duration = this@apply.text
+                settingsView.duration = this@apply.text
             }
 
             override fun removeUpdate(e: DocumentEvent?) {
-                configurationView.duration = this@apply.text
+                settingsView.duration = this@apply.text
             }
 
             override fun changedUpdate(e: DocumentEvent?) {
-                configurationView.duration = this@apply.text
+                settingsView.duration = this@apply.text
             }
         })
     }

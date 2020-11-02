@@ -10,10 +10,13 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Settings persistence
+ */
 @State(name = "com.github.pirocraft.challengingtimer.ui.ApplicationSettingsState",
         storages = {@Storage("SdkSettingsPlugin.xml")})
 public class ApplicationSettingsState implements PersistentStateComponent<ApplicationSettingsState> {
-    public String duration = DurationParserKt.display(ConfigurationKt.defaultDuration());
+    public String duration = DurationParserKt.format(ConfigurationKt.defaultDuration());
 
     public static ApplicationSettingsState getInstance() {
         return ServiceManager.getService(ApplicationSettingsState.class);

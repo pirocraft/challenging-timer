@@ -9,10 +9,10 @@ import kotlin.test.assertEquals
 internal class DurationParserKtShould {
     @Test
     internal fun `format a duration for display`() {
-        Assertions.assertEquals("0:00", Duration.ofSeconds(0).display())
-        Assertions.assertEquals("0:05", Duration.ofSeconds(5).display())
-        Assertions.assertEquals("0:30", Duration.ofSeconds(30).display())
-        Assertions.assertEquals("1:30", Duration.ofSeconds(30).plusMinutes(1).display())
+        Assertions.assertEquals("0:00", Duration.ofSeconds(0).format())
+        Assertions.assertEquals("0:05", Duration.ofSeconds(5).format())
+        Assertions.assertEquals("0:30", Duration.ofSeconds(30).format())
+        Assertions.assertEquals("1:30", Duration.ofSeconds(30).plusMinutes(1).format())
     }
 
     @Test

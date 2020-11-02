@@ -21,7 +21,7 @@ public class TimerToolWindow {
 
     public TimerToolWindow(ToolWindow toolWindow) {
         timerView = new TimerView();
-        timerLabel.setText(DurationParserKt.display(timerView.getTimeLeft()));
+        timerLabel.setText(DurationParserKt.format(timerView.getTimeLeft()));
         timerPanel.setBackground(mapColor(Color.GREEN));
         timerView.subscribe(this::updateTime, this::updateColor);
 
@@ -42,7 +42,7 @@ public class TimerToolWindow {
     }
 
     private Unit updateTime(Duration timeLeft) {
-        timerLabel.setText(DurationParserKt.display(timeLeft));
+        timerLabel.setText(DurationParserKt.format(timeLeft));
         return Unit.INSTANCE;
     }
 

@@ -1,9 +1,9 @@
 package com.github.pirocraft.challengingtimer.feature
 
 import com.github.pirocraft.challengingtimer.application.Configuration
-import com.github.pirocraft.challengingtimer.application.ConfigurationView
+import com.github.pirocraft.challengingtimer.application.SettingsView
 import com.github.pirocraft.challengingtimer.application.TimerView
-import com.github.pirocraft.challengingtimer.application.display
+import com.github.pirocraft.challengingtimer.application.format
 import io.cucumber.java8.En
 import io.cucumber.java8.Scenario
 import io.reactivex.rxjava3.schedulers.TestScheduler
@@ -16,7 +16,7 @@ class StepDefinitions : En {
 
     init {
         val timerView = TimerView()
-        val configurationView = ConfigurationView(Configuration.duration.display())
+        val configurationView = SettingsView(Configuration.duration.format())
         val scheduler = TestScheduler()
         val newDuration = Duration.ofSeconds(30).plusMinutes(2)
 

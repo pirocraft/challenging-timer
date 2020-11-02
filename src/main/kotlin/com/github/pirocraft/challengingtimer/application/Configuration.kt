@@ -9,6 +9,9 @@ private const val DEFAULT_MINUTE = 1.toLong()
 private const val DEFAULT_SECONDS = 30.toLong()
 fun defaultDuration(): Duration = Duration.ofSeconds(DEFAULT_SECONDS).plusMinutes(DEFAULT_MINUTE)
 
+/**
+ * Application current configuration, changes are propagated to subscribers.
+ */
 object Configuration {
     var duration: Duration = defaultDuration()
         set(value) {

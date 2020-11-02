@@ -6,8 +6,15 @@ const val MINUTES_IN_HOUR = 60
 const val SECONDS_IN_HOUR = 60
 const val DELIMITER = ":"
 
-fun Duration.display() = "${toMinutes() % MINUTES_IN_HOUR}:${(seconds % SECONDS_IN_HOUR).toString().padStart(2, '0')}"
+/**
+ * Display a duration with a 1:10 style
+ */
+fun Duration.format() = "${toMinutes() % MINUTES_IN_HOUR}:${(seconds % SECONDS_IN_HOUR).toString().padStart(2, '0')}"
 
+/**
+ * Parse a duration with a 1:10 style
+ * @throws DurationParseException if the duration has not a correct format
+ */
 fun parse(duration: String): Duration {
     if (duration.split(DELIMITER).size != 2)
         throw DurationParseException()
