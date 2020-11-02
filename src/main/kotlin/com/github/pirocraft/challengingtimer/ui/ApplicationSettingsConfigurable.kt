@@ -8,13 +8,13 @@ class ApplicationSettingsConfigurable : Configurable {
     private lateinit var configurationView: ConfigurationView
 
     override fun createComponent(): JComponent? {
-        configurationView = ConfigurationView(ApplicationSettingsState.duration)
+        configurationView = ConfigurationView(ApplicationSettingsState.getInstance().duration)
         return ApplicationSettingsComponent(configurationView).content()
     }
 
     override fun apply() {
         configurationView.validateChanges()
-        ApplicationSettingsState.duration = configurationView.duration
+        ApplicationSettingsState.getInstance().duration = configurationView.duration
     }
 
     override fun isModified(): Boolean {
