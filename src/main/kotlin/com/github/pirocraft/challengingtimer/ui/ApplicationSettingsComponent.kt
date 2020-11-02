@@ -10,9 +10,11 @@ import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 
 /**
- * IntelliJ settings component
+ * IntelliJ settings component that contains an Input Text for duration changes and its label
  */
 class ApplicationSettingsComponent(private val settingsView: SettingsView) {
+    private lateinit var inputText: JBTextField
+
     fun content(): JPanel = FormBuilder.createFormBuilder()
             .addLabeledComponent(JBLabel(settingsView.timerPeriodLabel),
                     inputField(),
@@ -20,7 +22,12 @@ class ApplicationSettingsComponent(private val settingsView: SettingsView) {
             .addComponentFillVertically(JPanel(), 0)
             .panel
 
+    fun updateDurationInputText(duration: String) {
+        inputText.text = duration
+    }
+
     private fun inputField(): JComponent = JBTextField(settingsView.duration).apply {
+        inputText = this
         document.addDocumentListener(object : DocumentListener {
             override fun insertUpdate(e: DocumentEvent?) {
                 settingsView.duration = this@apply.text

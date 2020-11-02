@@ -9,10 +9,12 @@ import javax.swing.JComponent
  */
 class ApplicationSettingsConfigurable : Configurable {
     private lateinit var settingsView: SettingsView
+    private lateinit var applicationSettingsComponent: ApplicationSettingsComponent
 
     override fun createComponent(): JComponent? {
         settingsView = SettingsView(ApplicationSettingsState.getInstance().duration)
-        return ApplicationSettingsComponent(settingsView).content()
+        applicationSettingsComponent = ApplicationSettingsComponent(settingsView)
+        return applicationSettingsComponent.content()
     }
 
     override fun apply() {
@@ -22,6 +24,10 @@ class ApplicationSettingsConfigurable : Configurable {
 
     override fun isModified(): Boolean {
         return settingsView.isChanged()
+    }
+
+    override fun reset() {
+        applicationSettingsComponent.updateDurationInputText(settingsView.previousDuration)
     }
 
     override fun getDisplayName() = "Challenging Timer"

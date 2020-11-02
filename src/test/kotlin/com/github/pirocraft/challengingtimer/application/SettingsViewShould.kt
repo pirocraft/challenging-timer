@@ -58,4 +58,11 @@ internal class SettingsViewShould {
         settingsView.validateChanges()
         assertEquals(Configuration.duration.format(), newDuration)
     }
+
+    @Test
+    internal fun `keep previous duration for reset`() {
+        val newDuration = "1:00"
+        settingsView.duration = newDuration
+        assertEquals(defaultDuration(), parse(settingsView.previousDuration))
+    }
 }
