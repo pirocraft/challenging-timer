@@ -165,12 +165,4 @@ internal class TimerViewShould {
         assertEquals(80, timerView.timeLeft.seconds)
         assertEquals(Color.GREEN, timerView.color)
     }
-
-    @Test
-    internal fun `format a duration for display`() {
-        assertEquals("0:00", Duration.ofSeconds(0).display())
-        assertEquals("0:05", Duration.ofSeconds(5).display())
-        assertEquals("0:30", Duration.ofSeconds(30).display())
-        assertEquals("1:30", Duration.ofSeconds(30).plusMinutes(1).display())
-    }
 }

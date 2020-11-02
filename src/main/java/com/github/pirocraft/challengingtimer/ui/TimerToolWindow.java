@@ -1,6 +1,6 @@
 package com.github.pirocraft.challengingtimer.ui;
 
-import com.github.pirocraft.challengingtimer.application.ConfigurationViewKt;
+import com.github.pirocraft.challengingtimer.application.DurationMapperKt;
 import com.github.pirocraft.challengingtimer.application.TimerView;
 import com.intellij.openapi.wm.ToolWindow;
 import kotlin.Unit;
@@ -21,7 +21,7 @@ public class TimerToolWindow {
 
     public TimerToolWindow(ToolWindow toolWindow) {
         timerView = new TimerView();
-        timerLabel.setText(ConfigurationViewKt.display(timerView.getTimeLeft()));
+        timerLabel.setText(DurationMapperKt.display(timerView.getTimeLeft()));
         timerPanel.setBackground(mapColor(Color.GREEN));
         timerView.subscribe(this::updateTime, this::updateColor);
 
@@ -42,7 +42,7 @@ public class TimerToolWindow {
     }
 
     private Unit updateTime(Duration timeLeft) {
-        timerLabel.setText(ConfigurationViewKt.display(timeLeft));
+        timerLabel.setText(DurationMapperKt.display(timeLeft));
         return Unit.INSTANCE;
     }
 
