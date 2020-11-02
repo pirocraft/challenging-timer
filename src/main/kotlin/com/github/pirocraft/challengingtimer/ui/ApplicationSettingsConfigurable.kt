@@ -23,7 +23,7 @@ class ApplicationSettingsConfigurable : Configurable {
     }
 
     override fun isModified(): Boolean {
-        return settingsView.isChanged()
+        return settingsView.modified
     }
 
     override fun reset() {

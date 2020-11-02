@@ -35,12 +35,12 @@ internal class SettingsViewShould {
     }
 
     @Test
-    internal fun `define if configuration is changed`() {
-        assertFalse(settingsView.isChanged())
+    internal fun `define if configuration is modified`() {
+        assertFalse(settingsView.modified)
         settingsView.duration = "1:00"
-        assertTrue(settingsView.isChanged())
+        assertTrue(settingsView.modified)
         settingsView.validateChanges()
-        assertFalse(settingsView.isChanged())
+        assertFalse(settingsView.modified)
     }
 
     @Test
