@@ -7,9 +7,8 @@ class SettingsView(duration: String,
                    val timerPeriodLabel: String = "Timer period :") {
     var duration = duration
         set(value) {
-            // TODO Check parsing
             field = value
-            modified = true
+            modified = value != previousDuration
         }
     var previousDuration = duration
         private set
@@ -20,6 +19,8 @@ class SettingsView(duration: String,
      * Validate and propagate settings changes
      */
     fun validateChanges() {
+        // TODO update previousDuration to duration
+        // TODO check duration parsing and throw error
         Configuration.duration = parse(duration)
         modified = false
     }

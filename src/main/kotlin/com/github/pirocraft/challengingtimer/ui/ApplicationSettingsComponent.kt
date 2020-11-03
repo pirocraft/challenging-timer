@@ -29,7 +29,6 @@ class ApplicationSettingsComponent(private val settingsView: SettingsView) {
     private fun inputField(): JComponent = JBTextField(settingsView.duration).apply {
         inputText = this
         document.addDocumentListener(object : DocumentListener {
-            // TODO Manage parsing errors
             override fun insertUpdate(e: DocumentEvent?) {
                 settingsView.duration = this@apply.text
             }

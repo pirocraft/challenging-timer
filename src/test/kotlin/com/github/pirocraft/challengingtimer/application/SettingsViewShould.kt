@@ -35,11 +35,21 @@ internal class SettingsViewShould {
     }
 
     @Test
-    internal fun `define if configuration is modified`() {
+    internal fun `be modified if duration is different from init value`() {
         assertFalse(settingsView.modified)
         settingsView.duration = "1:00"
         assertTrue(settingsView.modified)
         settingsView.validateChanges()
+        assertFalse(settingsView.modified)
+    }
+
+    @Test
+    internal fun `be not modified if duration is equal to init value`() {
+        val initialDuration = settingsView.duration
+        assertFalse(settingsView.modified)
+        settingsView.duration = "1:00"
+        assertTrue(settingsView.modified)
+        settingsView.duration = initialDuration
         assertFalse(settingsView.modified)
     }
 
