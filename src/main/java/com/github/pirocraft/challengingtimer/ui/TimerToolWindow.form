@@ -14,7 +14,7 @@
         </constraints>
         <properties>
           <enabled value="false"/>
-          <font size="72"/>
+          <font size="36"/>
           <text value="0:00"/>
         </properties>
       </component>
