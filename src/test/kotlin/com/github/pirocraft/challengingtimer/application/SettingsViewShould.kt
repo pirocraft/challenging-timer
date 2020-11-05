@@ -3,6 +3,7 @@ package com.github.pirocraft.challengingtimer.application
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
@@ -67,6 +68,7 @@ internal class SettingsViewShould {
         assertNotEquals(Configuration.duration.format(), newDuration)
         settingsView.validateChanges()
         assertEquals(Configuration.duration.format(), newDuration)
+        assertEquals(settingsView.previousDuration, settingsView.duration)
     }
 
     @Test
@@ -74,5 +76,13 @@ internal class SettingsViewShould {
         val newDuration = "1:00"
         settingsView.duration = newDuration
         assertEquals(defaultDuration(), parse(settingsView.previousDuration))
+    }
+
+    @Test
+    internal fun `throw duration parsing error`() {
+        assertThrows<DurationParseException> {
+            settingsView.duration = "123123"
+            settingsView.validateChanges()
+        }
     }
 }

@@ -19,8 +19,7 @@ class SettingsView(duration: String,
      * Validate and propagate settings changes
      */
     fun validateChanges() {
-        // TODO update previousDuration to duration
-        // TODO check duration parsing and throw error
+        previousDuration = duration
         Configuration.duration = parse(duration)
         modified = false
     }
