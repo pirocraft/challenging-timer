@@ -27,4 +27,4 @@ fun parse(duration: String): Duration {
     }
 }
 
-class DurationParseException(cause: Exception? = null) : Exception("Duration should respect this template $DURATION_PATTERN like 01:30", cause)
+class DurationParseException(cause: Exception? = null) : Exception("Duration must match this regexp $DURATION_PATTERN like 01:30", cause)

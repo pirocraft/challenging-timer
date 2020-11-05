@@ -14,7 +14,7 @@ class ApplicationSettingsConfigurable : Configurable {
     override fun createComponent(): JComponent? {
         settingsView = SettingsView(ApplicationSettingsState.getInstance().duration)
         applicationSettingsComponent = ApplicationSettingsComponent(settingsView)
-        return applicationSettingsComponent.content()
+        return applicationSettingsComponent.content
     }
 
     override fun apply() {
@@ -28,6 +28,10 @@ class ApplicationSettingsConfigurable : Configurable {
 
     override fun reset() {
         applicationSettingsComponent.updateDurationInputText(settingsView.previousDuration)
+    }
+
+    override fun disposeUIResources() {
+        applicationSettingsComponent.dispose()
     }
 
     override fun getDisplayName() = "Challenging Timer"

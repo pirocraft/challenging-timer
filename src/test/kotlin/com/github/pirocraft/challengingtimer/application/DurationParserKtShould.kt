@@ -40,6 +40,6 @@ internal class DurationParserKtShould {
 
     private fun shouldThrowParseError(duration: String) {
         val exception = assertThrows<DurationParseException> { parse(duration) }
-        assertEquals("Duration should respect this template \\d{1,2}:\\d{1,2} like 01:30", exception.message)
+        assertEquals("Duration must match this regexp \\d{1,2}:\\d{1,2} like 01:30", exception.message)
     }
 }
