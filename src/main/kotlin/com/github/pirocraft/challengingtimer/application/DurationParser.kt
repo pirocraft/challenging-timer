@@ -17,14 +17,10 @@ fun Duration.format() = "${toMinutes() % MINUTES_IN_HOUR}:${(seconds % SECONDS_I
  * @throws DurationParseException if the duration has not a correct format
  */
 fun parse(duration: String): Duration {
-    if (!duration.matches(Regex(DURATION_PATTERN)))
-        throw DurationParseException()
-    try {
-        val (minutes, seconds) = duration.split(DELIMITER).map { it.toLong() }
-        return Duration.ofSeconds(seconds).plusMinutes(minutes)
-    } catch (e: Exception) {
-        throw DurationParseException(e)
-    }
+    if (!duration.matches(Regex(DURATION_PATTERN))) throw DurationParseException()
+    val (minutes, seconds) = duration.split(DELIMITER).map { it.toLong() }
+    return Duration.ofSeconds(seconds).plusMinutes(minutes)
 }
 
-class DurationParseException(cause: Exception? = null) : Exception("Duration must match this regexp $DURATION_PATTERN like 01:30", cause)
+class DurationParseException(cause: Exception? = null) :
+        Exception("Duration must match this regexp $DURATION_PATTERN like 01:30", cause)
