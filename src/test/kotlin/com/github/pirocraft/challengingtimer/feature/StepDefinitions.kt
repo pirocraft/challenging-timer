@@ -26,8 +26,8 @@ class StepDefinitions : En {
             Configuration.reset()
         }
 
-        Then("the timer has periods of 1:30") {
-            assertEquals(Duration.ofSeconds(30).plusMinutes(1), timerView.timeLeft)
+        Then("the timer has periods of 3:00") {
+            assertEquals(Duration.ofSeconds(0).plusMinutes(3), timerView.timeLeft)
         }
 
         Then("the timer is green") {

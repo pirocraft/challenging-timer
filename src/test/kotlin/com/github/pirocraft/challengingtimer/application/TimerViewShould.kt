@@ -60,7 +60,7 @@ internal class TimerViewShould {
     internal fun `reset after configuration change`() {
         timerView.click(scheduler)
         scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
-        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(170, timerView.timeLeft.seconds)
 
         Configuration.duration = Duration.ofSeconds(30).plusMinutes(2)
         scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
@@ -74,11 +74,11 @@ internal class TimerViewShould {
 
         scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
         timerView.click()
-        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(170, timerView.timeLeft.seconds)
         assertEquals(Color.YELLOW, timerView.color)
 
         scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
-        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(170, timerView.timeLeft.seconds)
         assertEquals(Color.YELLOW, timerView.color)
     }
 
@@ -91,7 +91,7 @@ internal class TimerViewShould {
         timerView.click(scheduler)
         scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
 
-        assertEquals(70, timerView.timeLeft.seconds)
+        assertEquals(160, timerView.timeLeft.seconds)
         assertEquals(Color.GREEN, timerView.color)
     }
 
@@ -138,7 +138,7 @@ internal class TimerViewShould {
         timerView.doubleClick(scheduler)
         scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
 
-        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(170, timerView.timeLeft.seconds)
         assertEquals(Color.GREEN, timerView.color)
     }
 
@@ -152,7 +152,7 @@ internal class TimerViewShould {
         timerView.doubleClick(scheduler)
         scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
 
-        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(170, timerView.timeLeft.seconds)
         assertEquals(Color.GREEN, timerView.color)
     }
 
@@ -162,7 +162,7 @@ internal class TimerViewShould {
         scheduler.advanceTimeBy(1, TimeUnit.HOURS)
         timerView.click(scheduler)
         scheduler.advanceTimeBy(10, TimeUnit.SECONDS)
-        assertEquals(80, timerView.timeLeft.seconds)
+        assertEquals(170, timerView.timeLeft.seconds)
         assertEquals(Color.GREEN, timerView.color)
     }
 }
