@@ -14,6 +14,7 @@
 ### Fixed
 
 ### Security
+
 ## [1.0.0]
 
 ### Added
@@ -21,14 +22,6 @@
 
 ### Changed
 - Default timer set to 3:00 instead of 1:30
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
 
 ## [0.1.1]
 

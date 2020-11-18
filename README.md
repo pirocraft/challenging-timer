@@ -1,4 +1,4 @@
-# challenging-timer
+# ChallengingTimer
 
 ![Build](https://github.com/pirocraft/challenging-timer/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/com.github.pirocraft.challengingtimer.svg)](https://plugins.jetbrains.com/plugin/com.github.pirocraft.challengingtimer)
@@ -25,6 +25,11 @@ Check [challenging-timer.feature](./src/test/resources/feature/challenging-timer
   Download the [latest release](https://github.com/pirocraft/challenging-timer/releases/latest) and install it manually using
   <kbd>Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
+## Contribution
+
+Feel free to contribute to this plugin :
+- Suggesting new features that you are interested to use with an issue, or a PR with a cucumber .feature file
+- Pushing new features or fixes in PR
 
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
