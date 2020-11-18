@@ -1,4 +1,4 @@
-package com.github.pirocraft.challengingtimer
+package com.github.pirocraft.challengingtimer.application
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Scheduler
@@ -9,9 +9,6 @@ import java.awt.Color
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 import javax.annotation.Nullable
-
-const val MINUTES_IN_HOUR = 60
-const val SECONDS_IN_HOUR = 60
 
 /**
  * A timer that you can start, pause, resume and restart
@@ -76,16 +73,16 @@ class TimerView {
     }
 
     private fun launchATimer(scheduler: Scheduler?) =
-        intervalRange(scheduler).map { timeLeft = timeLeft.minusSeconds(1) }
-            .doOnSubscribe { color = Color.GREEN }
-            .doOnComplete { color = Color.RED }
-            .doOnDispose { color = Color.YELLOW }
-            .subscribe()
-            .apply { currentTimerDisposable = this }
+            intervalRange(scheduler).map { timeLeft = timeLeft.minusSeconds(1) }
+                    .doOnSubscribe { color = Color.GREEN }
+                    .doOnComplete { color = Color.RED }
+                    .doOnDispose { color = Color.YELLOW }
+                    .subscribe()
+                    .apply { currentTimerDisposable = this }
 
     private fun intervalRange(scheduler: Scheduler?) =
-        if (scheduler == null) Observable.intervalRange(1, timeLeft.seconds, 1, 1, TimeUnit.SECONDS)
-        else Observable.intervalRange(1, timeLeft.seconds, 1, 1, TimeUnit.SECONDS, scheduler)
+            if (scheduler == null) Observable.intervalRange(1, timeLeft.seconds, 1, 1, TimeUnit.SECONDS)
+            else Observable.intervalRange(1, timeLeft.seconds, 1, 1, TimeUnit.SECONDS, scheduler)
 
     private fun disposeCurrentTimer() {
         currentTimerDisposable?.dispose()
@@ -103,5 +100,3 @@ class TimerView {
         timeLeft = Configuration.duration
     }
 }
-
-fun Duration.display() = "${toMinutes() % MINUTES_IN_HOUR}:${(seconds % SECONDS_IN_HOUR).toString().padStart(2, '0')}"

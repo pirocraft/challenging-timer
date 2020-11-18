@@ -9,6 +9,10 @@ Use the challenging timer to practice TDD baby-steps,
 challenging yourself to make small changes that keep your tests green after each period
 <!-- Plugin description end -->
 
+## Features
+
+Check [challenging-timer.feature](./src/test/resources/feature/challenging-timer.feature) for details
+
 ## Installation
 
 - Using IDE built-in plugin system:
