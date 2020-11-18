@@ -3,11 +3,12 @@
 # challenging-timer Changelog
 
 ## [Unreleased]
-- I can change the timer duration
 
 ### Added
+- I can change the timer duration
 
 ### Changed
+- Default timer set to 3:00 instead of 1:30
 
 ### Deprecated
 
