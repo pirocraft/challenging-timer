@@ -8,14 +8,14 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="Challenging Timer"
+        <toolWindow id="ChallengingTimer"
                     icon="/icons/clock.svg"
                     anchor="left"
                     factoryClass="com.github.pirocraft.challengingtimer.ui.TimerToolWindowFactory"
                     secondary="true"/>
         <applicationConfigurable parentId="tools" instance="com.github.pirocraft.challengingtimer.ui.ApplicationSettingsConfigurable"
                                  id="com.github.pirocraft.challengingtimer.ui.ApplicationSettingsConfigurable"
-                                 displayName="Challenging Timer"/>
+                                 displayName="ChallengingTimer"/>
         <applicationService serviceImplementation="com.github.pirocraft.challengingtimer.ui.ApplicationSettingsState"/>
     </extensions>
 </idea-plugin>

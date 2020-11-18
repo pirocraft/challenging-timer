@@ -34,5 +34,5 @@ class ApplicationSettingsConfigurable : Configurable {
         applicationSettingsComponent.dispose()
     }
 
-    override fun getDisplayName() = "Challenging Timer"
+    override fun getDisplayName() = "ChallengingTimer"
 }
