@@ -3,6 +3,18 @@
 # challenging-timer Changelog
 
 ## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [1.0.1]
 
 ### Removed
 - Remove pluginIcon to use the real default one
