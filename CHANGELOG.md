@@ -3,17 +3,9 @@
 # challenging-timer Changelog
 
 ## [Unreleased]
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
 ### Fixed
+- 203.* compatibility
 
-### Security
 ## [1.0.1]
 
 ### Removed
