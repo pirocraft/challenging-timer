@@ -12,7 +12,7 @@ import java.time.Duration
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertEquals
 
-class StepDefinitions : En {
+class ChallengingTimerStepDefinitions : En {
 
     init {
         val timerView = TimerView()
