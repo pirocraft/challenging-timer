@@ -19,6 +19,8 @@ If you have finish to think before the end of the timer, you can restart the tim
 You can use the timer as a regular one, changing the duration in your settings.
 <!-- Plugin description end -->
 
+![Challenging timer example](./images/challenging-timer.gif)
+
 ## Features
 
 Check [challenging-timer.feature](./src/test/resources/feature/challenging-timer.feature) for details
