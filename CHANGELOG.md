@@ -6,6 +6,7 @@
 ### Added
 
 ### Changed
+- Better plugin description with gif
 
 ### Deprecated
 
@@ -14,6 +15,7 @@
 ### Fixed
 
 ### Security
+
 ## [1.0.2]
 ### Fixed
 - 203.* compatibility
